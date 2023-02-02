@@ -8,13 +8,22 @@
   ],
   "rules": {
     "prettier/prettier": "error",
+    "import/extensions": 0,
+    "no-restricted-exports": [
+      "error",
+      { "restrictDefaultExports": { "defaultFrom": false } }
+    ],
+    // react
     "import/no-unresolved": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-props-no-spreading": 0,
+    "react/function-component-definition": 0,
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ]
+    ],
+    // emotion
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }]
   },
   "root": true
 }
