@@ -5,12 +5,6 @@
     "paths": {
       "~/*": ["./*"]
     },
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "noEmit": true,
-    "incremental": true,
-    "module": "esnext",
-    "resolveJsonModule": true,
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react"
   },
