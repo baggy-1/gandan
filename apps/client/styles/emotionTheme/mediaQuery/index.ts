@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 
 const breakpoints = {
   mobile: 0,
@@ -7,14 +7,70 @@ const breakpoints = {
   desktop: 1024,
 } as const;
 
+const isString = (arg: unknown): arg is string => typeof arg === 'string';
+
 const isEmptyArray = (array: unknown[]) => array.length === 0;
 
-const serializedStyles = (template: TemplateStringsArray, args: unknown[]) => {
+const hasEverySerializedStylesProps = (
+  arg: object
+): arg is Record<keyof SerializedStyles, unknown> => {
+  const props = ['name', 'styles', 'map', 'next'] as const;
+
+  return props.every(prop => Object.prototype.hasOwnProperty.call(arg, prop));
+};
+
+const isSerializedStyles = (
+  arg: unknown | SerializedStyles
+): arg is SerializedStyles => {
+  return !!(
+    arg &&
+    typeof arg === 'object' &&
+    hasEverySerializedStylesProps(arg) &&
+    isString(arg.name) &&
+    isString(arg.styles) &&
+    (arg.map === undefined || isString(arg.map)) &&
+    (arg.next === undefined || isSerializedStyles(arg.next))
+  );
+};
+
+const mergeSerializedStyles = (
+  prev: string | SerializedStyles,
+  target: string | SerializedStyles
+) => css`
+  ${prev}
+  ${target}
+`;
+
+const interleave = <T, U>(front: readonly T[], back: readonly U[]) =>
+  front.reduce(
+    (acc, cur, index) =>
+      back[index] ? [...acc, cur, back[index]] : [...acc, cur],
+    [] as (T | U)[]
+  );
+
+const getSerializedStyles = (
+  template: TemplateStringsArray,
+  args: unknown[]
+) => {
   if (isEmptyArray(args)) {
     return template.raw.join('');
   }
 
-  return template.reduce((acc, cur, index) => acc + cur + args[index], '');
+  const correntArgs = args.filter(
+    (arg): arg is string | SerializedStyles =>
+      isString(arg) || isSerializedStyles(arg)
+  );
+
+  const interleaveTemplateArgs = interleave(template, correntArgs);
+
+  const serializedStyles = interleaveTemplateArgs.reduce<SerializedStyles>(
+    (acc, cur) => mergeSerializedStyles(acc, cur),
+    css``
+  );
+
+  return css`
+    ${serializedStyles}
+  `;
 };
 
 /**
@@ -33,7 +89,7 @@ const getMediaQuery =
   (template: TemplateStringsArray, ...args: unknown[]) =>
     css`
       @media only screen and (min-width: ${query}) {
-        ${serializedStyles(template, args)}
+        ${getSerializedStyles(template, args)}
       }
     `;
 

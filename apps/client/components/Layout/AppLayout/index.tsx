@@ -1,21 +1,11 @@
 import { PropsWithChildren } from 'react';
-import { Box, Text, VStack } from '@chakra-ui/react';
-import { useTheme, css } from '@emotion/react';
+import { VStack } from '@chakra-ui/react';
+import Nav from './Nav';
 
 const AppLayout = ({ children }: PropsWithChildren) => {
-  const { typography } = useTheme();
-
   return (
     <VStack>
-      <Box>
-        <Text
-          css={css`
-            ${typography.headline4}
-          `}
-        >
-          GD News
-        </Text>
-      </Box>
+      <Nav />
       <main>{children}</main>
     </VStack>
   );
