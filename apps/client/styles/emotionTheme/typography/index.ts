@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 /**
  * @desc font weighs
  *
@@ -86,9 +88,10 @@ const typeScale = {
   },
 } as const;
 
-const fontFamily = `"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;`;
+const fontFamily =
+  '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif';
 
-const getTypography = (type: keyof typeof typeScale) => `
+const getTypography = (type: keyof typeof typeScale) => css`
   font-family: ${fontFamily};
   font-size: ${typeScale[type].fontSize};
   font-weight: ${typeScale[type].fontWeight};
