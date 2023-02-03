@@ -1,12 +1,24 @@
 import { PropsWithChildren } from 'react';
-import { VStack } from '@chakra-ui/react';
+import { VStack, Container } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { css } from '@emotion/react';
 import Nav from './Nav';
+import LoginNav from './LoginNav';
 
 const AppLayout = ({ children }: PropsWithChildren) => {
+  const { pathname } = useRouter();
+
   return (
     <VStack>
-      <Nav />
-      <main>{children}</main>
+      {pathname === '/login' ? <LoginNav /> : <Nav />}
+      <Container
+        css={css`
+          width: 100%;
+          max-width: 96rem;
+        `}
+      >
+        <main>{children}</main>
+      </Container>
     </VStack>
   );
 };
