@@ -1,8 +1,18 @@
-import { Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Container,
+  Heading,
+  Stack,
+  Text,
+  HStack,
+} from '@chakra-ui/react';
 import { useTheme, css } from '@emotion/react';
+import Image from 'next/image';
+import { kakaoLoginLargeWide } from '@images/kakao';
+import { googleLogoDark } from '@images/google';
 
 const login = () => {
-  const { colors, typography } = useTheme();
+  const { colors } = useTheme();
 
   return (
     <Container
@@ -15,7 +25,7 @@ const login = () => {
     >
       <Stack
         css={css`
-          gap: 4rem;
+          gap: 8rem;
         `}
       >
         <Heading
@@ -45,10 +55,6 @@ const login = () => {
         >
           <Button
             css={css`
-              background-color: ${colors.kakao};
-              width: 20rem;
-              height: 3rem;
-              border-radius: 0.5rem;
               &:before {
                 content: '3초안에 로그인하기';
                 position: absolute;
@@ -63,30 +69,44 @@ const login = () => {
               }
             `}
           >
-            <Text
-              css={css`
-                ${typography.headline5}
-              `}
-            >
-              카카오로 계속하기
-            </Text>
+            <Image
+              src={kakaoLoginLargeWide}
+              alt="kakao-login"
+              width={320}
+              height={48}
+            />
           </Button>
           <Button
             css={css`
+              width: 320px;
+              height: 48px;
               background-color: ${colors.google};
-              width: 20rem;
-              height: 3rem;
-              border-radius: 0.5rem;
             `}
           >
-            <Text
+            <HStack
               css={css`
-                ${typography.headline5}
-                color: ${colors.white}
+                width: 100%;
+                height: 100%;
+                justify-content: space-baseline;
+                padding: 0 0.5rem;
               `}
             >
-              구글로 계속하기
-            </Text>
+              <Image
+                src={googleLogoDark}
+                alt="google-login"
+                width={32}
+                height={32}
+              />
+              <Text
+                css={css`
+                  flex: 1;
+                  padding: 0 1rem 0 0;
+                  color: ${colors.white};
+                `}
+              >
+                구글 로그인
+              </Text>
+            </HStack>
           </Button>
         </Stack>
       </Stack>

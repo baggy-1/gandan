@@ -1,7 +1,7 @@
 import { Flex, Box, Text, Center, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 import { css, useTheme } from '@emotion/react';
-import { ChevronLeft } from '~/assets/svgs/common';
+import { ChevronLeft } from '@svgs/common';
 
 const LoginNav = () => {
   const { colors, typography } = useTheme();

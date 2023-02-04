@@ -2,7 +2,7 @@ import { Flex, Text, Button, Avatar } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ChevronLeft } from '~/assets/svgs/common';
+import { ChevronLeft } from '@svgs/common';
 
 const Nav = () => {
   const { pathname, push } = useRouter();
