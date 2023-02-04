@@ -3,7 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": ["./*"],
+      "@svgs/*": ["./assets/svgs/*"],
+      "@images/*": ["./assets/images/*"],
+      "@views/*": ["./components/views/*"]
     },
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react"
