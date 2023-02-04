@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as env } from './env';
+export * from './auth';

@@ -10,9 +10,13 @@ import { useTheme, css } from '@emotion/react';
 import Image from 'next/image';
 import { kakaoLoginLargeWide } from '@images/kakao';
 import { googleLogoDark } from '@images/google';
+import { useRouter } from 'next/router';
+import { kakaoLoginUrl } from './LoginContainer.util';
 
 const LoginContainer = () => {
   const { colors } = useTheme();
+  const { replace } = useRouter();
+  const kakaoLogin = () => replace(kakaoLoginUrl);
 
   return (
     <Container
@@ -68,12 +72,14 @@ const LoginContainer = () => {
                 border-radius: 1.5rem;
               }
             `}
+            onClick={kakaoLogin}
           >
             <Image
               src={kakaoLoginLargeWide}
               alt="kakao-login"
               width={320}
               height={48}
+              priority
             />
           </Button>
           <Button

@@ -24,6 +24,7 @@
         "allowNamedExports": false
       }
     ],
+    "import/prefer-default-export": 0,
     // react
     "import/no-unresolved": 0,
     "react/react-in-jsx-scope": 0,
@@ -36,7 +37,9 @@
     ],
     "react/require-default-props": 0,
     // emotion
-    "react/no-unknown-property": ["error", { "ignore": ["css"] }]
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
+    // typescript
+    "@typescript-eslint/prefer-namespace-keyword": 0
   },
   "root": true
 }
