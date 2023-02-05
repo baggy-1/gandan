@@ -1,13 +1,14 @@
-import axios from 'axios';
+import axios, { CreateAxiosDefaults } from 'axios';
 import Cookies from 'js-cookie';
 import { token } from '~/constants';
 
-const createAuthApi = () => {
+const createApi = (config?: CreateAxiosDefaults) => {
   const accessToken = Cookies.get(token.accessToken);
 
   const _api = axios.create({
+    ...config,
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+      ...config?.headers,
       ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
     },
   });
@@ -17,15 +18,13 @@ const createAuthApi = () => {
   return _api;
 };
 
-export const kakaoApi = createAuthApi();
+export const kakaoApi = createApi({
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+  },
+});
 
-const createApi = () => {
-  const _api = axios.create();
-
-  _api.interceptors.response.use(response => response.data);
-
-  return _api;
-};
+export const googleApi = createApi();
 
 const api = createApi();
 

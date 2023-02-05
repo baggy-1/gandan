@@ -7,7 +7,7 @@ export const requestKakaoToken = (code: string) => {
     {
       grant_type: 'authorization_code',
       client_id: env.KAKAO_REST_API_KEY,
-      redirect_uri: env.KAKAO_REDIRECT_URL,
+      redirect_uri: env.KAKAO_REDIRECT_URI,
       code,
     }
   );
