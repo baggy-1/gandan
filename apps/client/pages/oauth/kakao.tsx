@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import OAuthView from '@views/OAuth';
-import { useOAuthLogin } from '~/services/auth';
+import { useOAuthLogin } from '~/services/client/auth';
 
 const OAuthKakaoPage = () => {
   const { query, replace } = useRouter();

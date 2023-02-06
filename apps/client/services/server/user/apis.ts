@@ -1,4 +1,4 @@
-import { googleApi, kakaoApi } from '~/services/api';
+import { googleApi, kakaoApi } from '~/services/server/api';
 
 export const getKaKaoUser = (token: string) => {
   return kakaoApi.get<null, Kakao.User>('https://kapi.kakao.com/v2/user/me', {

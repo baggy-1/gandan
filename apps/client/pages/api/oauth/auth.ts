@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import { NextApiRequest, NextApiResponse } from 'next';
 import { env } from '~/constants';
-import { serverApi } from '~/services/api';
-import { requestKakaoToken } from '~/services/auth';
-import { getGoogleUser, getKaKaoUser } from '~/services/user';
+import serverApi from '~/services/server/api';
+import { requestKakaoToken } from '~/services/server/auth';
+import { getGoogleUser, getKaKaoUser } from '~/services/server/user';
 
 const tokenType = 'bearer';
 

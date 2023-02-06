@@ -1,7 +1,7 @@
 import OAuthView from '@views/OAuth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useOAuthLogin } from '~/services/auth';
+import { useOAuthLogin } from '~/services/client/auth';
 
 const OAuthGooglePage = () => {
   const { asPath, replace } = useRouter();
