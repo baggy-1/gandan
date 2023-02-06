@@ -42,7 +42,7 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const kakaoUser = await getKaKaoUser(access_token);
     const { id, ...others } = getParseKakaoUser(kakaoUser);
     const user = await getUser(id);
-    const token = createToken();
+    const token = createToken({ userId: id });
 
     if (!user) {
       await createUser(id, {
@@ -69,7 +69,7 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const googleUser = await getGoogleUser(accessToken);
     const { id, ...others } = getParseGoogleUser(googleUser);
     const user = await getUser(id);
-    const token = createToken();
+    const token = createToken({ userId: id });
 
     if (!user) {
       await createUser(id, {

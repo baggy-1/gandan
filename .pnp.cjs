@@ -2680,6 +2680,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@next/font", "npm:13.1.6"],\
             ["@tanstack/react-query", "virtual:fd764e5f649046c9c398578c5217d1733b875c552deedbc555880cdf8a816b3c5b018ee82751f4e719c72e2d08d6502a635ed69f9ad2a0e7a4c5ffb69f388812#npm:4.24.4"],\
             ["@types/js-cookie", "npm:3.0.2"],\
+            ["@types/jsonwebtoken", "npm:9.0.1"],\
             ["@types/node", "npm:18.11.18"],\
             ["@types/react", "npm:18.0.27"],\
             ["@types/react-dom", "npm:18.0.10"],\
@@ -3095,6 +3096,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/jsonwebtoken", [\
+        ["npm:9.0.1", {\
+          "packageLocation": "./.yarn/cache/@types-jsonwebtoken-npm-9.0.1-5f660fdf38-a7f0925e9a.zip/node_modules/@types/jsonwebtoken/",\
+          "packageDependencies": [\
+            ["@types/jsonwebtoken", "npm:9.0.1"],\
+            ["@types/node", "npm:18.11.19"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/lodash", [\
         ["npm:4.14.191", {\
           "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.191-67a04a969b-ba0d5434e1.zip/node_modules/@types/lodash/",\
@@ -3119,6 +3130,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-18.11.18-d61e8a4a20-03f17f9480.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:18.11.18"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:18.11.19", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-18.11.19-dd4a5b3ed6-d7cd19fcfc.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:18.11.19"]\
           ],\
           "linkType": "HARD"\
         }]\

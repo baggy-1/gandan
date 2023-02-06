@@ -1,20 +1,11 @@
 /* eslint-disable camelcase */
+import jwt from 'jsonwebtoken';
 import { env } from '~/constants';
 
 const TOKEN = {
   type: 'bearer',
   expiresIn: 21600, // 6시간
-  refreshTokenExpiresIn: 5184000, // 60일
-};
-
-export const createToken = () => {
-  return {
-    token_type: TOKEN.type,
-    access_token: 'a',
-    expires_in: TOKEN.expiresIn,
-    refresh_token: 'r',
-    refresh_token_expires_in: TOKEN.refreshTokenExpiresIn,
-  };
+  refreshTokenExpiresIn: 1209600, // 2주
 };
 
 export const getParseKakaoUser = (user: Kakao.User) => {
@@ -42,5 +33,30 @@ export const getParseGoogleUser = (user: Google.User) => {
     nickname: name,
     profile: picture,
     email,
+  };
+};
+
+interface Payload {
+  userId: string;
+}
+
+export const createToken = (payload: Payload) => {
+  if (!env.ACCESS_TOKEN_SECRET || !env.REFRESH_TOKEN_SECRET) {
+    throw new Error('Invalid token secret');
+  }
+
+  const accessToken = jwt.sign(payload, env.ACCESS_TOKEN_SECRET, {
+    expiresIn: TOKEN.expiresIn,
+  });
+  const refreshToken = jwt.sign(payload, env.REFRESH_TOKEN_SECRET, {
+    expiresIn: TOKEN.refreshTokenExpiresIn,
+  });
+
+  return {
+    token_type: TOKEN.type,
+    access_token: accessToken,
+    expires_in: TOKEN.expiresIn,
+    refresh_token: refreshToken,
+    refresh_token_expires_in: TOKEN.refreshTokenExpiresIn,
   };
 };

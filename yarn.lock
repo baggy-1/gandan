@@ -1449,6 +1449,7 @@ __metadata:
     "@next/font": 13.1.6
     "@tanstack/react-query": ^4.24.4
     "@types/js-cookie": ^3.0.2
+    "@types/jsonwebtoken": ^9.0.1
     "@types/node": 18.11.18
     "@types/react": 18.0.27
     "@types/react-dom": 18.0.10
@@ -1786,6 +1787,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jsonwebtoken@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "@types/jsonwebtoken@npm:9.0.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: a7f0925e9a42ad3ae970364c63c5986d40da5c83d51d3f4e624eb0f064a380376f9e3fb3f2f837390a9ab80143f5d75fd51866da30e110f6b486a3379e1c768f
+  languageName: node
+  linkType: hard
+
 "@types/lodash.mergewith@npm:4.6.7":
   version: 4.6.7
   resolution: "@types/lodash.mergewith@npm:4.6.7"
@@ -1799,6 +1809,13 @@ __metadata:
   version: 4.14.191
   resolution: "@types/lodash@npm:4.14.191"
   checksum: ba0d5434e10690869f32d5ea49095250157cae502f10d57de0a723fd72229ce6c6a4979576f0f13e0aa9fbe3ce2457bfb9fa7d4ec3d6daba56730a51906d1491
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:*":
+  version: 18.11.19
+  resolution: "@types/node@npm:18.11.19"
+  checksum: d7cd19fcfc59cbdd3f9ba0b4072cb7adc21bd575bd8eb7d7e698975e63564aaa83f03434f32b12331f84f73d0b369d9cbe2371e359d9d7f5c3361f4987f4f7da
   languageName: node
   linkType: hard
 

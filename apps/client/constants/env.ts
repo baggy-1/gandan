@@ -6,6 +6,8 @@ const env = {
   FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
   KAKAO_ID_FLAG: process.env.KAKAO_ID_FLAG,
   GOOGLE_ID_FLAG: process.env.GOOGLE_ID_FLAG,
+  ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
 } as const;
 
 export default env;
