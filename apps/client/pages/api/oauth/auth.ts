@@ -1,11 +1,17 @@
 /* eslint-disable camelcase */
 import { NextApiRequest, NextApiResponse } from 'next';
-import { env } from '~/constants';
-import serverApi from '~/services/server/api';
 import { requestKakaoToken } from '~/services/server/auth';
-import { getGoogleUser, getKaKaoUser } from '~/services/server/user';
-
-const tokenType = 'bearer';
+import {
+  createUser,
+  getGoogleUser,
+  getKaKaoUser,
+  getUser,
+} from '~/services/server/user';
+import {
+  createToken,
+  getParseGoogleUser,
+  getParseKakaoUser,
+} from './auth.utils';
 
 const providers = {
   kakao: 'kakao',
@@ -34,35 +40,22 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { access_token } = await requestKakaoToken(code);
     const kakaoUser = await getKaKaoUser(access_token);
-    const { id, nickname, profile, email } = parseKakaoUser(kakaoUser);
-    const user = await serverApi.get(`/users/${id}.json?print=pretty`);
+    const { id, ...others } = getParseKakaoUser(kakaoUser);
+    const user = await getUser(id);
+    const token = createToken();
 
     if (!user) {
-      await serverApi.put(`/users/${id}.json`, {
+      await createUser(id, {
         id,
-        nickname,
-        profile,
-        email,
         createAt: new Date(),
         loginType: providers.kakao,
+        ...others,
       });
 
-      return res.status(200).json({
-        token_type: tokenType,
-        access_token: '존재하지 않아서 생성',
-        expires_in: 21600, // 6시간
-        refresh_token: 'r',
-        refresh_token_expires_in: 5184000, // 60일
-      });
+      return res.status(200).json(token);
     }
 
-    return res.status(200).json({
-      token_type: tokenType,
-      access_token: 'a',
-      expires_in: 21600, // 6시간
-      refresh_token: 'r',
-      refresh_token_expires_in: 5184000, // 60일
-    });
+    return res.status(200).json(token);
   }
 
   if (provider === providers.google) {
@@ -74,34 +67,22 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const googleUser = await getGoogleUser(accessToken);
-    const { id, nickname, profile, email } = parseGoogleUser(googleUser);
-    const user = await serverApi.get(`/users/${id}.json?print=pretty`);
+    const { id, ...others } = getParseGoogleUser(googleUser);
+    const user = await getUser(id);
+    const token = createToken();
+
     if (!user) {
-      await serverApi.put(`/users/${id}.json`, {
+      await createUser(id, {
         id,
-        nickname,
-        profile,
-        email,
         createAt: new Date(),
         loginType: providers.google,
+        ...others,
       });
 
-      return res.status(200).json({
-        token_type: tokenType,
-        access_token: '존재하지 않아서 생성',
-        expires_in: 21600, // 6시간
-        refresh_token: 'r',
-        refresh_token_expires_in: 5184000, // 60일
-      });
+      return res.status(200).json(token);
     }
 
-    return res.status(200).json({
-      token_type: tokenType,
-      access_token: 'a',
-      expires_in: 21600, // 6시간
-      refresh_token: 'r',
-      refresh_token_expires_in: 5184000, // 60일
-    });
+    return res.status(200).json(token);
   }
 
   return res
@@ -110,31 +91,3 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default authHandler;
-
-const parseKakaoUser = (user: Kakao.User) => {
-  const {
-    id,
-    kakao_account: {
-      profile: { nickname, profile_image_url },
-      email,
-    },
-  } = user;
-
-  return {
-    id: `${id}-@-${env.KAKAO_ID_FLAG}`,
-    nickname,
-    profile: profile_image_url,
-    email,
-  };
-};
-
-const parseGoogleUser = (user: Google.User) => {
-  const { id, email, name, picture } = user;
-
-  return {
-    id: `${id}-@-${env.GOOGLE_ID_FLAG}`,
-    nickname: name,
-    profile: picture,
-    email,
-  };
-};
