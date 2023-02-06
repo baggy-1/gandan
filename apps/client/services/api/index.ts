@@ -1,6 +1,6 @@
 import axios, { CreateAxiosDefaults } from 'axios';
 import Cookies from 'js-cookie';
-import { token } from '~/constants';
+import { env, token } from '~/constants';
 
 const createApi = (config?: CreateAxiosDefaults) => {
   const accessToken = Cookies.get(token.accessToken);
@@ -25,6 +25,10 @@ export const kakaoApi = createApi({
 });
 
 export const googleApi = createApi();
+
+export const serverApi = createApi({
+  baseURL: env.FIREBASE_DATABASE_URL,
+});
 
 const api = createApi();
 

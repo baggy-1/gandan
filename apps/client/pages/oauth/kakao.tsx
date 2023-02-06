@@ -1,19 +1,24 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import OAuthView from '@views/OAuth';
-import { useRequestKakaoToken } from '~/services/auth';
+import { useOAuthLogin } from '~/services/auth';
 
 const OAuthKakaoPage = () => {
   const { query, replace } = useRouter();
-  const { mutate } = useRequestKakaoToken();
+  const { mutate } = useOAuthLogin('kakao');
 
   useEffect(() => {
     if (!query.code || typeof query.code !== 'string') {
       return;
     }
 
+    if (query.error) {
+      // TODO: 사용자 로그인 취소 알림
+      replace('/');
+    }
+
     mutate(query.code, {
-      onSuccess: () => {
+      onSettled: () => {
         replace('/');
       },
     });

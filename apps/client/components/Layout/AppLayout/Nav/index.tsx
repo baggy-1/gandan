@@ -3,13 +3,11 @@ import { css, useTheme } from '@emotion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChevronLeft } from '@svgs/common';
-import { useFetchKakaoUser } from '~/services/user/queries';
 
 const Nav = () => {
   const { pathname, push } = useRouter();
-  const { isDetail } = getRouterState(pathname);
+  const { isDetail, isAuthorized } = getRouterState(pathname);
   const { typography, colors } = useTheme();
-  const { data } = useFetchKakaoUser();
 
   return (
     <header
@@ -68,7 +66,7 @@ const Nav = () => {
             align-items: center;
           `}
         >
-          {data ? (
+          {isAuthorized ? (
             <Avatar
               css={css`
                 width: 2rem;

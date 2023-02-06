@@ -1,13 +1,15 @@
 import { googleApi, kakaoApi } from '~/services/api';
 
-export const getKaKaoUser = () => {
-  return kakaoApi.get<null, Kakao.UserResponse>(
-    'https://kapi.kakao.com/v2/user/me'
-  );
+export const getKaKaoUser = (token: string) => {
+  return kakaoApi.get<null, Kakao.User>('https://kapi.kakao.com/v2/user/me', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const getGoogleUser = (token: string) => {
-  return googleApi.get<null, Google.UserResponse>(
+  return googleApi.get<null, Google.User>(
     'https://www.googleapis.com/oauth2/v2/userinfo',
     {
       headers: {
