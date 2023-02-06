@@ -7,6 +7,11 @@ declare module OAuth {
     refresh_token: string;
     refresh_token_expires_in: number;
   }
+
+  interface AccessToken {
+    access_token: string;
+    expires_in: number;
+  }
 }
 
 declare module Kakao {

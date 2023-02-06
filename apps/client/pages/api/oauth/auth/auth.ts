@@ -7,11 +7,8 @@ import {
   getKaKaoUser,
   getUser,
 } from '~/services/server/user';
-import {
-  createToken,
-  getParseGoogleUser,
-  getParseKakaoUser,
-} from './auth.utils';
+import { getTokenResponse } from '../token/token.utils';
+import { getParseGoogleUser, getParseKakaoUser } from './auth.utils';
 
 const providers = {
   kakao: 'kakao',
@@ -42,15 +39,21 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const kakaoUser = await getKaKaoUser(access_token);
     const { id, ...others } = getParseKakaoUser(kakaoUser);
     const user = await getUser(id);
-    const token = createToken({ userId: id });
+    const token = await getTokenResponse({ userId: id });
 
     if (!user) {
-      await createUser(id, {
-        id,
-        createAt: new Date(),
-        loginType: providers.kakao,
-        ...others,
-      });
+      try {
+        await createUser(id, {
+          id,
+          createAt: new Date(),
+          loginType: providers.kakao,
+          ...others,
+        });
+      } catch (error) {
+        return res
+          .status(500)
+          .json({ message: 'Internal server error', error });
+      }
 
       return res.status(200).json(token);
     }
@@ -69,15 +72,21 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const googleUser = await getGoogleUser(accessToken);
     const { id, ...others } = getParseGoogleUser(googleUser);
     const user = await getUser(id);
-    const token = createToken({ userId: id });
+    const token = await getTokenResponse({ userId: id });
 
     if (!user) {
-      await createUser(id, {
-        id,
-        createAt: new Date(),
-        loginType: providers.google,
-        ...others,
-      });
+      try {
+        await createUser(id, {
+          id,
+          createAt: new Date(),
+          loginType: providers.google,
+          ...others,
+        });
+      } catch (error) {
+        return res
+          .status(500)
+          .json({ message: 'Internal server error', error });
+      }
 
       return res.status(200).json(token);
     }
