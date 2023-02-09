@@ -1,5 +1,21 @@
+declare module OAuth {
+  type Provider = 'kakao' | 'google';
+  interface Token {
+    token_type: string;
+    access_token: string;
+    expires_in: number;
+    refresh_token: string;
+    refresh_token_expires_in: number;
+  }
+
+  interface AccessToken {
+    access_token: string;
+    expires_in: number;
+  }
+}
+
 declare module Kakao {
-  interface TokenResponse {
+  interface Token {
     access_token: string;
     expires_in: number;
     id_token: string;
@@ -11,10 +27,12 @@ declare module Kakao {
 
   /**
    * @desc 카카오 로그인 사용자 정보 응답
+   * @ 필수동의: 닉네임
+   * @ 선택동의: 프로필 사진, 이메일
    *
    * @see https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#req-user-info
    */
-  interface UserResponse {
+  interface User {
     id: number;
     connected_at: string;
     kakao_account: {
@@ -26,5 +44,18 @@ declare module Kakao {
       };
       email?: string;
     };
+  }
+}
+
+declare module Google {
+  interface User {
+    email: string;
+    family_name: string;
+    given_name: string;
+    id: string;
+    locale: string;
+    name: string;
+    picture: string;
+    verified_email: boolean;
   }
 }

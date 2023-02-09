@@ -11,12 +11,13 @@ import Image from 'next/image';
 import { kakaoLoginLargeWide } from '@images/kakao';
 import { googleLogoDark } from '@images/google';
 import { useRouter } from 'next/router';
-import { kakaoLoginUrl } from './LoginContainer.util';
+import { kakaoLoginUrl, googleLoginUrl } from './LoginContainer.util';
 
 const LoginContainer = () => {
   const { colors } = useTheme();
   const { replace } = useRouter();
   const kakaoLogin = () => replace(kakaoLoginUrl);
+  const googleLogin = () => replace(googleLoginUrl);
 
   return (
     <Container
@@ -88,6 +89,7 @@ const LoginContainer = () => {
               height: 48px;
               background-color: ${colors.google};
             `}
+            onClick={googleLogin}
           >
             <HStack
               css={css`

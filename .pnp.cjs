@@ -2687,6 +2687,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.33.0"],\
             ["eslint-config-next", "virtual:fd764e5f649046c9c398578c5217d1733b875c552deedbc555880cdf8a816b3c5b018ee82751f4e719c72e2d08d6502a635ed69f9ad2a0e7a4c5ffb69f388812#npm:13.1.6"],\
             ["framer-motion", "virtual:fd764e5f649046c9c398578c5217d1733b875c552deedbc555880cdf8a816b3c5b018ee82751f4e719c72e2d08d6502a635ed69f9ad2a0e7a4c5ffb69f388812#npm:9.0.1"],\
+            ["jose", "npm:4.11.2"],\
             ["js-cookie", "npm:3.0.1"],\
             ["next", "virtual:fd764e5f649046c9c398578c5217d1733b875c552deedbc555880cdf8a816b3c5b018ee82751f4e719c72e2d08d6502a635ed69f9ad2a0e7a4c5ffb69f388812#npm:13.1.6"],\
             ["react", "npm:18.2.0"],\
@@ -5656,6 +5657,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/isexe-npm-2.0.0-b58870bd2e-26bf6c5480.zip/node_modules/isexe/",\
           "packageDependencies": [\
             ["isexe", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["jose", [\
+        ["npm:4.11.2", {\
+          "packageLocation": "./.yarn/cache/jose-npm-4.11.2-f3f8bb7bbb-bc9b2271c3.zip/node_modules/jose/",\
+          "packageDependencies": [\
+            ["jose", "npm:4.11.2"]\
           ],\
           "linkType": "HARD"\
         }]\
