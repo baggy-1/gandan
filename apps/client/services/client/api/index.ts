@@ -1,7 +1,7 @@
 import axios, { AxiosError, CreateAxiosDefaults } from 'axios';
 import Cookies from 'js-cookie';
 import { token } from '~/constants';
-import { retryRequestRefreshAccessToken } from '../auth';
+import { removeTokens, retryRequestRefreshAccessToken } from '../auth';
 
 const createApi = (config?: CreateAxiosDefaults) => {
   const accessToken = Cookies.get(token.accessToken);
@@ -21,15 +21,16 @@ const createApi = (config?: CreateAxiosDefaults) => {
         if (error.response?.status === 401) {
           const refreshToken = Cookies.get(token.refreshToken);
 
-          if (refreshToken) {
-            return retryRequestRefreshAccessToken(_api, error);
-          }
+          return refreshToken
+            ? retryRequestRefreshAccessToken(_api, error)
+            : removeTokens();
         }
 
         if (error.response?.status === 403) {
-          Cookies.remove(token.accessToken);
-          Cookies.remove(token.refreshToken);
+          return removeTokens();
         }
+
+        return Promise.reject(error);
       }
 
       return Promise.reject(error);

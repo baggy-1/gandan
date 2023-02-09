@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { AxiosInstance, AxiosError } from 'axios';
 import Cookies from 'js-cookie';
 import { token } from '~/constants';
@@ -48,7 +49,17 @@ export const retryRequestRefreshAccessToken = async (
       Authorization: `Bearer ${access_token}`,
     },
   };
+  // eslint-disable-next-line dot-notation
   config.headers['Authorization'] = `Bearer ${access_token}`;
 
+  // eslint-disable-next-line consistent-return
   return instance.request(config);
+};
+
+export const removeTokens = () => {
+  Cookies.remove(token.accessToken);
+  Cookies.remove(token.refreshToken);
+
+  // eslint-disable-next-line dot-notation
+  api.defaults.headers['Authorization'] = '';
 };

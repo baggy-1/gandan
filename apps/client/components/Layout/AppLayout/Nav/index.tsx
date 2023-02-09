@@ -1,13 +1,16 @@
-import { Flex, Text, Button, Avatar } from '@chakra-ui/react';
+import { Flex, Text, Button } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChevronLeft } from '@svgs/common';
+import { useQueryMe } from '~/services/client/user/queries';
+import { UserAvatar } from '~/components/common';
 
 const Nav = () => {
   const { pathname, push } = useRouter();
-  const { isDetail, isAuthorized } = getRouterState(pathname);
+  const { isDetail } = getRouterState(pathname);
   const { typography, colors } = useTheme();
+  const { data: me } = useQueryMe();
 
   return (
     <header
@@ -66,13 +69,8 @@ const Nav = () => {
             align-items: center;
           `}
         >
-          {isAuthorized ? (
-            <Avatar
-              css={css`
-                width: 2rem;
-                height: 2rem;
-              `}
-            />
+          {me ? (
+            <UserAvatar profile={me.profile} />
           ) : (
             <Button
               css={css`
@@ -95,8 +93,6 @@ const getRouterState = (pathname: string) => {
 
   return {
     isDetail: detail.includes(pathname),
-    // TODO: 로그인 여부 확인
-    isAuthorized: false,
   };
 };
 

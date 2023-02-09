@@ -30,7 +30,6 @@ const middleware = async (req: NextRequest) => {
     );
   }
 
-  // TODO: 토큰 검증
   if (!env.ACCESS_TOKEN_SECRET) {
     return new NextResponse(
       JSON.stringify({
@@ -41,7 +40,11 @@ const middleware = async (req: NextRequest) => {
   }
 
   try {
-    await verifyToken(token, env.ACCESS_TOKEN_SECRET);
+    const payload = await verifyToken(token, env.ACCESS_TOKEN_SECRET);
+    const urlWithPayload = `${nextPath}?payload=${JSON.stringify(payload)}`;
+
+    return rewrite(new URL(urlWithPayload, req.url));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (!error.code) {
       return new NextResponse(
