@@ -1453,6 +1453,7 @@ __metadata:
     "@types/react": 18.0.27
     "@types/react-dom": 18.0.10
     axios: ^1.3.2
+    dayjs: ^1.11.7
     eslint: 8.33.0
     eslint-config-next: 13.1.6
     framer-motion: ^9.0.1
@@ -1461,6 +1462,7 @@ __metadata:
     next: 13.1.6
     react: 18.2.0
     react-dom: 18.2.0
+    rss-to-json: ^2.1.1
     typescript: 4.9.5
   languageName: unknown
   linkType: soft
@@ -2163,7 +2165,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.3.2":
+"axios@npm:^1.2.6, axios@npm:^1.3.2":
   version: 1.3.2
   resolution: "axios@npm:1.3.2"
   dependencies:
@@ -2401,6 +2403,13 @@ __metadata:
   version: 1.0.8
   resolution: "damerau-levenshtein@npm:1.0.8"
   checksum: d240b7757544460ae0586a341a53110ab0a61126570ef2d8c731e3eab3f0cb6e488e2609e6a69b46727635de49be20b071688698744417ff1b6c1d7ccd03e0de
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.7":
+  version: 1.11.7
+  resolution: "dayjs@npm:1.11.7"
+  checksum: 5003a7c1dd9ed51385beb658231c3548700b82d3548c0cfbe549d85f2d08e90e972510282b7506941452c58d32136d6362f009c77ca55381a09c704e9f177ebb
   languageName: node
   linkType: hard
 
@@ -3055,6 +3064,17 @@ __metadata:
   version: 2.0.6
   resolution: "fast-levenshtein@npm:2.0.6"
   checksum: 92cfec0a8dfafd9c7a15fba8f2cc29cd0b62b85f056d99ce448bbcd9f708e18ab2764bda4dd5158364f4145a7c72788538994f0d1787b956ef0d1062b0f7c24c
+  languageName: node
+  linkType: hard
+
+"fast-xml-parser@npm:^4.0.15":
+  version: 4.1.1
+  resolution: "fast-xml-parser@npm:4.1.1"
+  dependencies:
+    strnum: ^1.0.5
+  bin:
+    fxparser: src/cli/cli.js
+  checksum: 16f08571e798f8ee9940ff12ccf71e3a1b9c11530ef660473c0ea794875fba345dd855bfaeefa07b0db2222c3c50196a410953f7e95878e13071aa9b91e82165
   languageName: node
   linkType: hard
 
@@ -4588,6 +4608,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rss-to-json@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "rss-to-json@npm:2.1.1"
+  dependencies:
+    axios: ^1.2.6
+    fast-xml-parser: ^4.0.15
+  checksum: 97b05b187cf89842c292f6bf0794dd04b744aa9a579d2865d54f216e622010f628761b9549eedb999b971e6a6d2202900111a5fa422b12a46914ca20640a862e
+  languageName: node
+  linkType: hard
+
 "run-parallel@npm:^1.1.9":
   version: 1.2.0
   resolution: "run-parallel@npm:1.2.0"
@@ -4759,6 +4789,13 @@ __metadata:
   version: 3.1.1
   resolution: "strip-json-comments@npm:3.1.1"
   checksum: 492f73e27268f9b1c122733f28ecb0e7e8d8a531a6662efbd08e22cccb3f9475e90a1b82cab06a392f6afae6d2de636f977e231296400d0ec5304ba70f166443
+  languageName: node
+  linkType: hard
+
+"strnum@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "strnum@npm:1.0.5"
+  checksum: 651b2031db5da1bf4a77fdd2f116a8ac8055157c5420f5569f64879133825915ad461513e7202a16d7fec63c54fd822410d0962f8ca12385c4334891b9ae6dd2
   languageName: node
   linkType: hard
 

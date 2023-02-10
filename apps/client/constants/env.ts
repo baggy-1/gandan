@@ -8,6 +8,8 @@ const env = {
   GOOGLE_ID_FLAG: process.env.GOOGLE_ID_FLAG,
   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
+  NAVER_NEWS_CLIENT_ID: process.env.NAVER_NEWS_CLIENT_ID,
+  NAVER_NEWS_CLIENT_SECRET: process.env.NAVER_NEWS_CLIENT_SECRET,
 } as const;
 
 export default env;
