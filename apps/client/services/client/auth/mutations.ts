@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import { loginOAuthKakao, loginOAuthGoogle } from './apis';
 import { token } from '~/constants';
-import getExpriesDate from '~/utils/getExpriesDate';
+import { getExpriesDate } from '~/utils';
 import api from '../api';
 
 export const useOAuthLogin = (provider: OAuth.Provider) => {

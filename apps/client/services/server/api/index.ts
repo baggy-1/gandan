@@ -3,7 +3,6 @@ import { env } from '~/constants';
 
 const createApi = (config?: CreateAxiosDefaults) => {
   const _api = axios.create({
-    baseURL: env.FIREBASE_DATABASE_URL,
     ...config,
     headers: {
       ...config?.headers,
@@ -23,6 +22,10 @@ export const kakaoApi = createApi({
 
 export const googleApi = createApi();
 
-const serverApi = createApi();
+export const api = createApi();
+
+const serverApi = createApi({
+  baseURL: env.FIREBASE_DATABASE_URL,
+});
 
 export default serverApi;

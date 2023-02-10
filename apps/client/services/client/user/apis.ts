@@ -1,5 +1,5 @@
-import api from '../api';
+import clientApi from '../api';
 
 export const getMe = () => {
-  return api.get<null, User>('/api/user/me');
+  return clientApi.get<null, User>('/api/user/me');
 };

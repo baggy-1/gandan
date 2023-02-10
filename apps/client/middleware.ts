@@ -6,7 +6,7 @@ export const config = {
   matcher: ['/api/:path*'],
 };
 
-const excludePaths = ['/api/oauth/auth', '/api/oauth/token'];
+const excludePaths = ['/api/oauth/auth', '/api/oauth/token', '/api/news'];
 
 const middleware = async (req: NextRequest) => {
   const {
@@ -15,7 +15,7 @@ const middleware = async (req: NextRequest) => {
   } = req;
   const { rewrite } = NextResponse;
 
-  if (excludePaths.includes(nextPath)) {
+  if (excludePaths.find(path => nextPath.startsWith(path))) {
     return rewrite(new URL(nextPath, req.url));
   }
 
