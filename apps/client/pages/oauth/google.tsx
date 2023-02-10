@@ -2,6 +2,7 @@ import OAuthView from '@views/OAuth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useOAuthLogin } from '~/services/client/auth';
+import { getParamsInPath } from '~/utils';
 
 const OAuthGooglePage = () => {
   const { asPath, replace } = useRouter();
@@ -27,9 +28,3 @@ const OAuthGooglePage = () => {
 };
 
 export default OAuthGooglePage;
-
-const getParamsInPath = (path: string) => {
-  const parseParams = path.split('#')[1]?.split('&') ?? [];
-
-  return Object.fromEntries(parseParams.map(param => param.split('=')));
-};
