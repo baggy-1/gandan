@@ -1,3 +1,8 @@
+const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://gandan-news.vercel.app/'
+    : 'http://localhost:3000';
+
 const env = {
   KAKAO_REST_API_KEY: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY,
   KAKAO_REDIRECT_URI: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI,
@@ -10,6 +15,7 @@ const env = {
   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
   NAVER_NEWS_CLIENT_ID: process.env.NAVER_NEWS_CLIENT_ID,
   NAVER_NEWS_CLIENT_SECRET: process.env.NAVER_NEWS_CLIENT_SECRET,
+  BASE_URL,
 } as const;
 
 export default env;

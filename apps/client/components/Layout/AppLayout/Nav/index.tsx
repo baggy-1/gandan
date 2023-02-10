@@ -24,6 +24,7 @@ const Nav = () => {
         top: 0;
         display: flex;
         justify-content: center;
+        z-index: 999;
       `}
     >
       <Flex
@@ -70,7 +71,10 @@ const Nav = () => {
           `}
         >
           {me ? (
-            <UserAvatar profile={me.profile} />
+            <UserAvatar
+              profile={me.profile}
+              onClick={() => push('/user/mynews')}
+            />
           ) : (
             <Button
               css={css`

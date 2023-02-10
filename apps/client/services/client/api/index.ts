@@ -1,6 +1,6 @@
 import axios, { AxiosError, CreateAxiosDefaults } from 'axios';
 import Cookies from 'js-cookie';
-import { token } from '~/constants';
+import { env, token } from '~/constants';
 import { removeTokens, retryRequestRefreshAccessToken } from '../auth';
 
 const createApi = (config?: CreateAxiosDefaults) => {
@@ -40,6 +40,8 @@ const createApi = (config?: CreateAxiosDefaults) => {
   return _api;
 };
 
-const api = createApi();
+const clientApi = createApi({
+  baseURL: env.BASE_URL,
+});
 
-export default api;
+export default clientApi;

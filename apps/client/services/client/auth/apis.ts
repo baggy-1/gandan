@@ -2,11 +2,11 @@
 import { AxiosInstance, AxiosError } from 'axios';
 import Cookies from 'js-cookie';
 import { token } from '~/constants';
-import api from '~/services/client/api';
-import getExpriesDate from '~/utils/getExpriesDate';
+import clientApi from '~/services/client/api';
+import { getExpriesDate } from '~/utils';
 
 export const loginOAuthKakao = (code: string) => {
-  return api.post<null, OAuth.Token>('/api/oauth/auth', {
+  return clientApi.post<null, OAuth.Token>('/api/oauth/auth', {
     provider: 'kakao',
     data: {
       code,
@@ -15,7 +15,7 @@ export const loginOAuthKakao = (code: string) => {
 };
 
 export const loginOAuthGoogle = (accessToken: string) => {
-  return api.post<null, OAuth.Token>('/api/oauth/auth', {
+  return clientApi.post<null, OAuth.Token>('/api/oauth/auth', {
     provider: 'google',
     data: {
       accessToken,
@@ -24,7 +24,7 @@ export const loginOAuthGoogle = (accessToken: string) => {
 };
 
 export const getAccessToken = (refreshToken: string) => {
-  return api.post<null, OAuth.AccessToken>('/api/oauth/token', {
+  return clientApi.post<null, OAuth.AccessToken>('/api/oauth/token', {
     refreshToken,
   });
 };
@@ -61,5 +61,5 @@ export const removeTokens = () => {
   Cookies.remove(token.refreshToken);
 
   // eslint-disable-next-line dot-notation
-  api.defaults.headers['Authorization'] = '';
+  clientApi.defaults.headers['Authorization'] = '';
 };

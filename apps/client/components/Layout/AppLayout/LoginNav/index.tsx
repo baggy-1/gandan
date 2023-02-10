@@ -17,6 +17,7 @@ const LoginNav = () => {
         padding: 1rem;
         display: flex;
         justify-content: center;
+        z-index: 999;
       `}
     >
       <Flex

@@ -1,5 +1,15 @@
+import { Suspense } from 'react';
+
 const MyNewsContainer = () => {
-  return <div>g</div>;
+  return <div>저장한 뉴스</div>;
 };
 
-export default MyNewsContainer;
+const SuspenseMyNewsContainer = () => {
+  return (
+    <Suspense fallback={<div>로딩중...</div>}>
+      <MyNewsContainer />
+    </Suspense>
+  );
+};
+
+export default SuspenseMyNewsContainer;

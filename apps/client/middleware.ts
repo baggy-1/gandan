@@ -15,7 +15,7 @@ const middleware = async (req: NextRequest) => {
   } = req;
   const { rewrite } = NextResponse;
 
-  if (excludePaths.includes(nextPath)) {
+  if (excludePaths.find(path => nextPath.startsWith(path))) {
     return rewrite(new URL(nextPath, req.url));
   }
 

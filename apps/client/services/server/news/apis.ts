@@ -25,10 +25,14 @@ const getRssToJson: Parse = (rss: string) => {
   return parse(rss);
 };
 
-export const createNews = (id: string, news: News) => {
+export const createNewsById = (id: string, news: News) => {
   return serverApi.put<null, News>(`/news/${id}.json`, news);
 };
 
-export const getNews = (id: string) => {
+export const getNewsById = (id: string) => {
   return serverApi.get<null, News>(`/news/${id}.json?print=pretty`);
+};
+
+export const getNews = () => {
+  return serverApi.get<null, ServerNewslist>(`/news.json?print=pretty`);
 };
