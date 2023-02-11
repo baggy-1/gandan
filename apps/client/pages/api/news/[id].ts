@@ -45,11 +45,16 @@ export default newsIdHandler;
 const getParseHeadlines = (news: GoogleNews): Headline[] => {
   const { items } = news;
 
-  return items.map(({ id, title, link }) => ({
-    id,
-    title,
-    link,
-  }));
+  return items.map(({ id, title: originTitle, link }) => {
+    const [title, press] = originTitle.split(' - ');
+
+    return {
+      id,
+      title,
+      link,
+      press,
+    };
+  });
 };
 
 const sizes = {
