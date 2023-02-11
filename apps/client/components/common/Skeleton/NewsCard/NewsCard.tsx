@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
 
 const NewsCard = () => {
-  const { colors } = useTheme();
+  const { colors, keyframes } = useTheme();
 
   return (
     <Box
@@ -13,6 +13,7 @@ const NewsCard = () => {
         border-radius: 0.5rem;
         position: relative;
         overflow: hidden;
+        animation: ${keyframes.blink} 1.5s infinite;
       `}
     >
       <Box

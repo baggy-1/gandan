@@ -6,3 +6,9 @@ interface User {
   createAt: string | Date;
   loginType: string;
 }
+
+interface MyNews {
+  id: string;
+  title: string;
+  thumbnail: string;
+}
