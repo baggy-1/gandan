@@ -43,7 +43,8 @@ const NewsCard = ({ news }: Props) => {
           <Text
             css={css`
               ${typography.body1}
-              color: ${colors.white}
+              color: ${colors.white};
+              text-align: center;
             `}
           >
             {title}
@@ -51,7 +52,8 @@ const NewsCard = ({ news }: Props) => {
           <Text
             css={css`
               ${typography.body2}
-              color: ${colors.white}
+              color: ${colors.white};
+              text-align: center;
             `}
           >
             1분만에 보는 헤드라인
