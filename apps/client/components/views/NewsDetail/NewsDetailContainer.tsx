@@ -3,15 +3,20 @@ import { useTheme, css } from '@emotion/react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Suspense } from 'react';
+import { useRouter } from 'next/router';
 import { CursorArrow } from '@svgs/common';
 import { useQueryNewsById } from '~/services/client/news/queries';
 
 const NewsDetailContainer = () => {
-  const { query } = useRouter();
-  const { id: queryId } = query;
-  const id = `${queryId}`;
+  const {
+    query: { id },
+  } = useRouter();
+
+  if (!id || typeof id !== 'string') {
+    return null;
+  }
+
   const { data: news } = useQueryNewsById(id);
   const { colors, typography } = useTheme();
 

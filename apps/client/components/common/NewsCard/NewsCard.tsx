@@ -24,9 +24,16 @@ const NewsCard = ({ news }: Props) => {
           position: relative;
           width: 10rem;
           height: 12rem;
+          border-radius: 0.5rem;
+          overflow: hidden;
         `}
       >
-        <Image src={thumbnail.sm} alt="news thumbnail" fill />
+        <Image
+          src={thumbnail.sm}
+          alt="news thumbnail"
+          width={160}
+          height={192}
+        />
         <Flex
           css={css`
             position: absolute;

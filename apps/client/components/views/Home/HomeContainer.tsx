@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import NewsList from '~/components/common/NewsList';
 import { useQueryNews, useQueryNewsById } from '~/services/client/news/queries';
 import { getKoreaDate } from '~/utils';
+import { NewsListSkeleton } from '~/components/common/Skeleton';
 
 const HomeContainer = () => {
   const { data: newslist } = useQueryNews();
@@ -29,7 +30,7 @@ const CreateNewsContainer = ({
 
 const SuspenseHomeContainer = () => {
   return (
-    <Suspense fallback={<div>로딩중...</div>}>
+    <Suspense fallback={<NewsListSkeleton />}>
       <CreateNewsContainer>
         <HomeContainer />
       </CreateNewsContainer>
