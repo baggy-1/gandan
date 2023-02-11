@@ -88,6 +88,7 @@ const LoginContainer = () => {
               width: 320px;
               height: 48px;
               background-color: ${colors.google};
+              border-radius: 0.3rem;
             `}
             onClick={googleLogin}
           >

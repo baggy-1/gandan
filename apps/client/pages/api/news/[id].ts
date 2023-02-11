@@ -6,11 +6,17 @@ import {
   createNewsById,
 } from '~/services/server/news/apis';
 import getKoreaDate from '~/utils/getKoreaDate';
+import { getParseHeadlines, getRandomThumbnail } from './[id].util';
 
 const newsIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { id: queryId },
   } = req;
+
+  if (queryId === 'undefined') {
+    return res.status(400).json({ error: 'Invalid news id' });
+  }
+
   const newsId = `${queryId}`;
 
   try {
@@ -22,11 +28,12 @@ const newsIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const googleNews = await getGoogleHeadlineNews();
     const headlines = getParseHeadlines(googleNews);
-    const { date: id, datetime, dateKorea } = getKoreaDate(new Date());
+    const { date, datetime, dateKorea } = getKoreaDate(new Date());
+    const id = `${date}-@-news`;
     const thumbnail = getRandomThumbnail(id);
 
     const newNews = await createNewsById(id, {
-      id: `${id}-@-news`,
+      id,
       title: dateKorea,
       headlines,
       createAt: datetime,
@@ -40,31 +47,3 @@ const newsIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default newsIdHandler;
-
-const getParseHeadlines = (news: GoogleNews): Headline[] => {
-  const { items } = news;
-
-  return items.map(({ id, title, link }) => ({
-    id,
-    title,
-    link,
-  }));
-};
-
-const sizes = {
-  sm: '240/320',
-  md: '480/640',
-  lg: '720/960',
-} as const;
-
-const getRandomThumbnail = (seed: string) => {
-  const sm = `https://picsum.photos/seed/${seed}/${sizes.sm}.webp`;
-  const md = `https://picsum.photos/seed/${seed}/${sizes.md}.webp`;
-  const lg = `https://picsum.photos/seed/${seed}/${sizes.lg}.webp`;
-
-  return {
-    sm,
-    md,
-    lg,
-  };
-};

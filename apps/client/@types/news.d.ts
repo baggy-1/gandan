@@ -2,6 +2,7 @@ interface Headline {
   id: string;
   title: string;
   link: string;
+  press: string;
 }
 
 interface Thumbnail {

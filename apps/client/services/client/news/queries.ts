@@ -1,12 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
 import { useSuspensedQuery } from '~/hooks';
 import queryKeys from '../querykeys';
 import { getNews, getNewsById } from './apis';
 
 export const useQueryNews = () => {
-  return useSuspensedQuery(queryKeys.news, getNews);
+  return useSuspensedQuery(queryKeys.news, getNews, {
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useQueryNewsById = (id: string) => {
-  return useQuery(queryKeys.newsById(id), () => getNewsById(id));
+  return useSuspensedQuery(queryKeys.newsById(id), () => getNewsById(id), {
+    refetchOnWindowFocus: false,
+  });
 };

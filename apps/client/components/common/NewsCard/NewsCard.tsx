@@ -24,9 +24,16 @@ const NewsCard = ({ news }: Props) => {
           position: relative;
           width: 10rem;
           height: 12rem;
+          border-radius: 0.5rem;
+          overflow: hidden;
         `}
       >
-        <Image src={thumbnail.sm} alt="news thumbnail" fill />
+        <Image
+          src={thumbnail.sm}
+          alt="news thumbnail"
+          width={160}
+          height={192}
+        />
         <Flex
           css={css`
             position: absolute;
@@ -43,7 +50,8 @@ const NewsCard = ({ news }: Props) => {
           <Text
             css={css`
               ${typography.body1}
-              color: ${colors.white}
+              color: ${colors.white};
+              text-align: center;
             `}
           >
             {title}
@@ -51,7 +59,8 @@ const NewsCard = ({ news }: Props) => {
           <Text
             css={css`
               ${typography.body2}
-              color: ${colors.white}
+              color: ${colors.white};
+              text-align: center;
             `}
           >
             1분만에 보는 헤드라인

@@ -2,8 +2,8 @@ import { Flex } from '@chakra-ui/react';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { Suspense } from 'react';
 import NewsList from '~/components/common/NewsList';
-import { useQueryNews, useQueryNewsById } from '~/services/client/news/queries';
-import { getKoreaDate } from '~/utils';
+import { useQueryNews } from '~/services/client/news/queries';
+import { NewsListSkeleton } from '~/components/common/Skeleton';
 
 const HomeContainer = () => {
   const { data: newslist } = useQueryNews();
@@ -20,16 +20,16 @@ const CreateNewsContainer = ({
 }: {
   children: EmotionJSX.Element;
 }) => {
-  const { date } = getKoreaDate(new Date());
-  const id = `${date}-@-news`;
-  useQueryNewsById(id);
+  // const { date } = getKoreaDate(new Date());
+  // const id = `${date}-@-news`;
+  // useQueryNewsById(id);
 
   return <>{children}</>;
 };
 
 const SuspenseHomeContainer = () => {
   return (
-    <Suspense fallback={<div>로딩중...</div>}>
+    <Suspense fallback={<NewsListSkeleton />}>
       <CreateNewsContainer>
         <HomeContainer />
       </CreateNewsContainer>

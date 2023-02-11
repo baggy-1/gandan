@@ -6,5 +6,6 @@ import { getMe } from './apis';
 export const useQueryMe = () => {
   return useQuery(queryKeys.me, getMe, {
     enabled: isExistToken(),
+    refetchOnWindowFocus: false,
   });
 };
