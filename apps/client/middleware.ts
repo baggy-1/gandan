@@ -84,8 +84,6 @@ const middleware = async (req: NextRequest) => {
         );
     }
   }
-
-  return rewrite(new URL(nextPath, req.url));
 };
 
 export default middleware;

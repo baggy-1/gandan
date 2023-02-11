@@ -20,7 +20,7 @@ interface News {
 }
 
 interface ServerNewslist {
-  [key in string]: News;
+  [key: string]: News;
 }
 
 type ClientNewslist = Omit<News, 'headlines'>[];

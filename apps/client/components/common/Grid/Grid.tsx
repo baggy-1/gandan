@@ -1,12 +1,8 @@
 import { Flex, SimpleGrid } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
-import NewsCard from '~/components/common/NewsCard';
+import { PropsWithChildren } from 'react';
 
-interface Props {
-  newslist: News[];
-}
-
-const NewsList = ({ newslist }: Props) => {
+const Grid = ({ children }: PropsWithChildren) => {
   const { mediaQuery } = useTheme();
 
   return (
@@ -30,12 +26,10 @@ const NewsList = ({ newslist }: Props) => {
         `}
         `}
       >
-        {newslist.map(news => {
-          return <NewsCard key={news.id} news={news} />;
-        })}
+        {children}
       </SimpleGrid>
     </Flex>
   );
 };
 
-export default NewsList;
+export default Grid;

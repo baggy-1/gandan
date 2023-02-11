@@ -1,12 +1,19 @@
 import { Suspense } from 'react';
-import NewsList from '~/components/common/NewsList';
-import { useQueryNews } from '~/services/client/news/queries';
+import Grid from '~/components/common/Grid';
+import NewsCard from '~/components/common/NewsCard';
 import { NewsListSkeleton } from '~/components/common/Skeleton';
+import { useQueryNews } from '~/services/client/news';
 
 const HomeContainer = () => {
   const { data: newslist } = useQueryNews();
 
-  return <NewsList newslist={newslist} />;
+  return (
+    <Grid>
+      {newslist.map(news => {
+        return <NewsCard key={news.id} {...news} />;
+      })}
+    </Grid>
+  );
 };
 
 const SuspenseHomeContainer = () => {

@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getUser } from '~/services/server/user';
+import { getUserIdInPayload } from '../api.util';
 
 const meHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const userId = getUserId(req.query);
+  const userId = getUserIdInPayload(req.query);
 
   if (!userId) {
     return res.status(401).json({ message: 'check payload' });
@@ -14,14 +15,3 @@ const meHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default meHandler;
-
-const getUserId = (query: NextApiRequest['query']) => {
-  const { payload } = query;
-
-  if (!payload || typeof payload !== 'string') {
-    return null;
-  }
-
-  const { userId } = JSON.parse(payload) as { userId: string };
-  return userId;
-};

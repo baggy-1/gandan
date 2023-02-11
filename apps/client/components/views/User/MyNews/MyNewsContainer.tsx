@@ -1,7 +1,8 @@
 import { Suspense } from 'react';
+import Grid from '~/components/common/Grid';
 
 const MyNewsContainer = () => {
-  return <div>저장한 뉴스</div>;
+  return <Grid />;
 };
 
 const SuspenseMyNewsContainer = () => {

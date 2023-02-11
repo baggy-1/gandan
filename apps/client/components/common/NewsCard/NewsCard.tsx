@@ -3,13 +3,10 @@ import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-interface Props {
-  news: News;
-}
+type Props = Pick<News, 'id' | 'title' | 'thumbnail'>;
 
-const NewsCard = ({ news }: Props) => {
+const NewsCard = ({ id, title, thumbnail }: Props) => {
   const { push } = useRouter();
-  const { id, title, thumbnail } = news;
   const { typography, colors } = useTheme();
 
   return (

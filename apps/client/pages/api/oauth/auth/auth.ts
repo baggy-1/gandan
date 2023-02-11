@@ -7,6 +7,7 @@ import {
   getKaKaoUser,
   getUser,
 } from '~/services/server/user';
+import { getKoreaDate } from '~/utils';
 import { getTokenResponse } from '../token/token.utils';
 import { getParseGoogleUser, getParseKakaoUser } from './auth.utils';
 
@@ -73,12 +74,13 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { id, ...others } = getParseGoogleUser(googleUser);
     const user = await getUser(id);
     const token = await getTokenResponse({ userId: id });
+    const { datetime } = getKoreaDate(new Date());
 
     if (!user) {
       try {
         await createUser(id, {
           id,
-          createAt: new Date(),
+          createAt: datetime,
           loginType: providers.google,
           ...others,
         });
