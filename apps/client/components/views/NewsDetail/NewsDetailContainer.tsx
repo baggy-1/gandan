@@ -1,10 +1,11 @@
-import { Box, Divider, Text, VStack } from '@chakra-ui/react';
+import { Box, Card, Divider, Flex, Text, VStack } from '@chakra-ui/react';
 import { useTheme, css } from '@emotion/react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Suspense } from 'react';
+import { CursorArrow } from '@svgs/common';
 import { useQueryNewsById } from '~/services/client/news/queries';
 
 const NewsDetailContainer = () => {
@@ -19,8 +20,8 @@ const NewsDetailContainer = () => {
       <Box
         css={css`
           width: 100%;
-          justify-content: flex-start;
           padding: 0 1rem;
+          justify-content: flex-start;
         `}
       >
         <Text
@@ -51,10 +52,39 @@ const NewsDetailContainer = () => {
           gap: 1rem;
         `}
       >
-        {news.headlines.map(headline => {
+        {news.headlines.map(({ id: headlineId, link, title, press }) => {
           return (
-            <Link key={headline.id} href={headline.link}>
-              <Text>{headline.title}</Text>
+            <Link key={headlineId} href={link}>
+              <Card>
+                <Flex
+                  css={css`
+                    gap: 0.5rem;
+                    flex-direction: column;
+                  `}
+                >
+                  <Flex>
+                    <Box
+                      css={css`
+                        width: fit-content;
+                        padding: 0.25rem;
+                        border: 1px solid ${colors.grayE8};
+                        border-radius: 0.25rem;
+                        background-color: ${colors.grayE8};
+                      `}
+                    >
+                      <span
+                        css={css`
+                          ${typography.button}
+                        `}
+                      >
+                        {press}
+                      </span>
+                    </Box>
+                    <CursorArrow width="1.5rem" height="1.5rem" />
+                  </Flex>
+                  <span>{title}</span>
+                </Flex>
+              </Card>
             </Link>
           );
         })}

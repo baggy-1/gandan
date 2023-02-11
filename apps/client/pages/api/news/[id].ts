@@ -11,6 +11,11 @@ const newsIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { id: queryId },
   } = req;
+
+  if (queryId === 'undefined') {
+    return res.status(400).json({ error: 'Invalid news id' });
+  }
+
   const newsId = `${queryId}`;
 
   try {
