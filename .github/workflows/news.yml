@@ -1,0 +1,30 @@
+name: news
+
+on:
+  schedule:
+    - cron: '0 21 * * *' # 매일 6시
+
+jobs:
+  api-call:
+    name: news api call
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Call Api
+        run: |
+          curl --request POST \
+          --url 'https://gandan-news.vercel.app/api/cron' \
