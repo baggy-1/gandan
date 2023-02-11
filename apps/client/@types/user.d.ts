@@ -10,5 +10,10 @@ interface User {
 interface Bookmark {
   id: string;
   title: string;
-  thumbnail: string;
+  thumbnail: Thumbnail;
+  createAt: string | Date;
+}
+
+interface ServerBookmark {
+  [key: News['id']]: Bookmark;
 }

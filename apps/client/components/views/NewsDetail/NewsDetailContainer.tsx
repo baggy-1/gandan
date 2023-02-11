@@ -5,21 +5,47 @@ import 'dayjs/locale/ko';
 import { Suspense } from 'react';
 import { useRouter } from 'next/router';
 import { useQueryNewsById } from '~/services/client/news/queries';
+import { useQueryBookmark } from '~/services/client/bookmark/queries';
 import Headline from '~/components/common/Headline';
 import { HeadlineContainerSkeleton } from '~/components/common/Skeleton';
 import { Bookmark } from '~/assets/svgs/common';
+import {
+  useCreateBookmark,
+  useDeleteBookmark,
+} from '~/services/client/bookmark';
+import { getKoreaDate } from '~/utils';
 
-const NewsDetailContainer = () => {
-  const {
-    query: { id },
-  } = useRouter();
+interface Props {
+  id: string;
+}
 
-  if (!id || typeof id !== 'string') {
-    return null;
-  }
-
+const NewsDetail = ({ id }: Props) => {
   const { data: news } = useQueryNewsById(id);
+  const { data: bookmarks } = useQueryBookmark();
+  const { mutate: createBookmarkMutate } = useCreateBookmark();
+  const { mutate: deleteBookmarkMutate } = useDeleteBookmark();
   const { colors, typography } = useTheme();
+
+  const isCheckedBookmark = bookmarks?.some(
+    bookmark => bookmark.id === news.id
+  );
+
+  const toggleBookmark = () => {
+    if (isCheckedBookmark) {
+      deleteBookmarkMutate(news.id);
+      return;
+    }
+
+    const { id: newsId, title, thumbnail } = news;
+    const { datetime } = getKoreaDate(new Date());
+
+    createBookmarkMutate({
+      id: newsId,
+      title,
+      thumbnail,
+      createAt: datetime,
+    });
+  };
 
   return (
     <VStack>
@@ -50,8 +76,9 @@ const NewsDetailContainer = () => {
           css={css`
             cursor: pointer;
           `}
+          onClick={toggleBookmark}
         >
-          <Bookmark />
+          <Bookmark fill={isCheckedBookmark} />
         </Center>
       </Flex>
       <Divider
@@ -73,6 +100,18 @@ const NewsDetailContainer = () => {
       </VStack>
     </VStack>
   );
+};
+
+const NewsDetailContainer = () => {
+  const {
+    query: { id },
+  } = useRouter();
+
+  if (!id || typeof id !== 'string') {
+    return null;
+  }
+
+  return <NewsDetail id={id} />;
 };
 
 const SuspenseNewsDetailContainer = () => {

@@ -1,23 +1,14 @@
 interface Props {
   width?: string | number;
   height?: string | number;
-  fill?: 'unchecked' | 'checked';
+  fill?: boolean;
 }
 
-const fillState = {
-  unchecked: 'none',
-  checked: 'yellow',
-};
-
-const Bookmark = ({
-  width = '2rem',
-  height = '2rem',
-  fill = 'unchecked',
-}: Props) => {
+const Bookmark = ({ width = '2rem', height = '2rem', fill = false }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill={fillState[fill]}
+      fill={fill ? 'yellow' : 'none'}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
