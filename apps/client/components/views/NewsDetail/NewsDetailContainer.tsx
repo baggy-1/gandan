@@ -1,12 +1,12 @@
-import { Box, Card, Divider, Flex, Text, VStack } from '@chakra-ui/react';
+import { Box, Divider, Text, VStack } from '@chakra-ui/react';
 import { useTheme, css } from '@emotion/react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import Link from 'next/link';
 import { Suspense } from 'react';
 import { useRouter } from 'next/router';
-import { CursorArrow } from '@svgs/common';
 import { useQueryNewsById } from '~/services/client/news/queries';
+import Headline from '~/components/common/Headline';
+import { HeadlineContainerSkeleton } from '~/components/common/Skeleton';
 
 const NewsDetailContainer = () => {
   const {
@@ -57,41 +57,8 @@ const NewsDetailContainer = () => {
           gap: 1rem;
         `}
       >
-        {news.headlines.map(({ id: headlineId, link, title, press }) => {
-          return (
-            <Link key={headlineId} href={link}>
-              <Card>
-                <Flex
-                  css={css`
-                    gap: 0.5rem;
-                    flex-direction: column;
-                  `}
-                >
-                  <Flex>
-                    <Box
-                      css={css`
-                        width: fit-content;
-                        padding: 0.25rem;
-                        border: 1px solid ${colors.grayE8};
-                        border-radius: 0.25rem;
-                        background-color: ${colors.grayE8};
-                      `}
-                    >
-                      <span
-                        css={css`
-                          ${typography.button}
-                        `}
-                      >
-                        {press}
-                      </span>
-                    </Box>
-                    <CursorArrow width="1.5rem" height="1.5rem" />
-                  </Flex>
-                  <span>{title}</span>
-                </Flex>
-              </Card>
-            </Link>
-          );
+        {news.headlines.map(headline => {
+          return <Headline key={headline.id} headline={headline} />;
         })}
       </VStack>
     </VStack>
@@ -100,7 +67,7 @@ const NewsDetailContainer = () => {
 
 const SuspenseNewsDetailContainer = () => {
   return (
-    <Suspense fallback={<div>로딩중...</div>}>
+    <Suspense fallback={<HeadlineContainerSkeleton />}>
       <NewsDetailContainer />
     </Suspense>
   );

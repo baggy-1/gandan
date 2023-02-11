@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
 
-const NewsCardSkeleton = () => {
+const NewsCard = () => {
   const { colors } = useTheme();
 
   return (
@@ -29,4 +29,4 @@ const NewsCardSkeleton = () => {
   );
 };
 
-export default NewsCardSkeleton;
+export default NewsCard;

@@ -1,8 +1,8 @@
 import { Center, SimpleGrid } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
-import NewsCardSkeleton from './NewsCardSkeleton';
+import NewsCardSkeleton from '../NewsCard';
 
-const NewsListSkeleton = () => {
+const NewsList = () => {
   const { mediaQuery } = useTheme();
 
   return (
@@ -36,4 +36,4 @@ const NewsListSkeleton = () => {
   );
 };
 
-export default NewsListSkeleton;
+export default NewsList;
