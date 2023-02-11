@@ -28,3 +28,4 @@ jobs:
         run: |
           curl --request POST \
           --url 'https://gandan-news.vercel.app/api/cron' \
+          --header 'Authorization: ${{ secrets.CRON_NEWS_TOKEN }}'

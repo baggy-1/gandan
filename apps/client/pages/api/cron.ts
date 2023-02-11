@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { env } from '~/constants';
 import {
   createNewsById,
   getGoogleHeadlineNews,
@@ -11,6 +12,12 @@ const cronHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).end('Method Not Allowed');
+  }
+
+  const { authorization } = req.headers;
+
+  if (authorization !== env.CRON_NEWS_TOKEN) {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   const { date, dateKorea, datetime } = getKoreaDate(new Date());
