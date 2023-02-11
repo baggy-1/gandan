@@ -1,11 +1,7 @@
-import { useRouter } from 'next/router';
+import NewsDetailViews from '@views/NewsDetail';
 
 const NewsDetail = () => {
-  const { query } = useRouter();
-  const { id: queryId } = query;
-  const id = `${queryId}`;
-
-  return <div>뉴스 디테일</div>;
+  return <NewsDetailViews />;
 };
 
 export default NewsDetail;

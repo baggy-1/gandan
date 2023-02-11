@@ -22,11 +22,12 @@ const newsIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const googleNews = await getGoogleHeadlineNews();
     const headlines = getParseHeadlines(googleNews);
-    const { date: id, datetime, dateKorea } = getKoreaDate(new Date());
+    const { date, datetime, dateKorea } = getKoreaDate(new Date());
+    const id = `${date}-@-news`;
     const thumbnail = getRandomThumbnail(id);
 
     const newNews = await createNewsById(id, {
-      id: `${id}-@-news`,
+      id,
       title: dateKorea,
       headlines,
       createAt: datetime,
