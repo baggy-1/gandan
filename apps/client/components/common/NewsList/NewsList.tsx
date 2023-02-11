@@ -1,4 +1,4 @@
-import { Center, SimpleGrid } from '@chakra-ui/react';
+import { Flex, SimpleGrid } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
 import NewsCard from '~/components/common/NewsCard';
 
@@ -10,10 +10,11 @@ const NewsList = ({ newslist }: Props) => {
   const { mediaQuery } = useTheme();
 
   return (
-    <Center
+    <Flex
       css={css`
         width: 100%;
         height: 100%;
+        justify-content: center;
       `}
     >
       <SimpleGrid
@@ -33,7 +34,7 @@ const NewsList = ({ newslist }: Props) => {
           return <NewsCard key={news.id} news={news} />;
         })}
       </SimpleGrid>
-    </Center>
+    </Flex>
   );
 };
 
