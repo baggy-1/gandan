@@ -6,7 +6,12 @@ export const config = {
   matcher: ['/api/:path*'],
 };
 
-const excludePaths = ['/api/oauth/auth', '/api/oauth/token', '/api/news'];
+const excludePaths = [
+  '/api/oauth/auth',
+  '/api/oauth/token',
+  '/api/news',
+  '/api/cron',
+];
 
 const middleware = async (req: NextRequest) => {
   const {
