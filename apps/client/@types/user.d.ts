@@ -7,7 +7,7 @@ interface User {
   loginType: string;
 }
 
-interface MyNews {
+interface Bookmark {
   id: string;
   title: string;
   thumbnail: string;
