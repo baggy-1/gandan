@@ -30,7 +30,6 @@ const Header = ({ id, title, thumbnail, createAt }: Props) => {
         title: '로그인이 필요한 서비스입니다.',
         description: '로그인 후 북마크 기능을 이용해보세요!',
         status: 'warning',
-        duration: 500000,
       });
       return;
     }
