@@ -1,6 +1,6 @@
-import { Avatar } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import Image from 'next/image';
+import avatar from '@images/avatar.jpg';
 
 interface AvatarProps {
   profile?: string;
@@ -15,23 +15,14 @@ const UserAvatar = ({
   width = 32,
   height = 32,
 }: AvatarProps) => {
-  return profile ? (
+  return (
     <Image
-      src={profile}
+      src={profile ?? avatar}
       alt="user-profile"
       width={width}
       height={height}
       css={css`
         border-radius: 50%;
-        cursor: pointer;
-      `}
-      onClick={onClick}
-    />
-  ) : (
-    <Avatar
-      css={css`
-        width: 2rem;
-        height: 2rem;
         cursor: pointer;
       `}
       onClick={onClick}

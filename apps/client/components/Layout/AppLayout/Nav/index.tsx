@@ -93,7 +93,7 @@ const Nav = () => {
 
 const getRouterState = (pathname: string) => {
   // TODO: 뒤로 가야할 페이지들 변수명 생각해보기
-  const detail = ['/news/[id]'];
+  const detail = ['/news/[id]', '/user/mynews'];
 
   return {
     isDetail: detail.includes(pathname),
