@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from '~/pages/api/oauth/token/token.utils';
-import { env } from './constants';
-import { isExistToken } from './utils';
+import { env, token as TOKEN } from './constants';
 
 export const config = {
   matcher: ['/api/:path*', '/user/:path*'],
@@ -24,7 +23,10 @@ const middleware = async (req: NextRequest) => {
   const { rewrite, redirect } = NextResponse;
 
   if (authPaths.includes(nextPath)) {
-    if (isExistToken()) {
+    const isExistToken =
+      req.cookies.has(TOKEN.accessToken) && req.cookies.has(TOKEN.refreshToken);
+
+    if (isExistToken) {
       return rewrite(new URL(nextPath, req.url));
     }
 
