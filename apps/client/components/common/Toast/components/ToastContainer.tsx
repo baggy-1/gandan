@@ -19,10 +19,9 @@ const ToastContainer = () => {
         css={css`
           position: fixed;
           left: 50%;
-          bottom: 0;
+          bottom: 1rem;
           transform: translateX(-50%);
-          width: 20rem;
-          gap: 0.5rem;
+          gap: 1rem;
           display: flex;
           flex-direction: column;
         `}
