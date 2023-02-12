@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from '~/pages/api/oauth/token/token.utils';
 import { env } from './constants';
+import { isExistToken } from './utils';
 
 export const config = {
-  matcher: ['/api/:path*'],
+  matcher: ['/api/:path*', '/user/:path*'],
 };
 
 const excludePaths = [
@@ -13,12 +14,22 @@ const excludePaths = [
   '/api/cron',
 ];
 
+const authPaths = ['/user/mynews'];
+
 const middleware = async (req: NextRequest) => {
   const {
     nextUrl: { pathname: nextPath },
     headers,
   } = req;
-  const { rewrite } = NextResponse;
+  const { rewrite, redirect } = NextResponse;
+
+  if (authPaths.includes(nextPath)) {
+    if (isExistToken()) {
+      return rewrite(new URL(nextPath, req.url));
+    }
+
+    return redirect(new URL('/login', req.url));
+  }
 
   if (excludePaths.find(path => nextPath.startsWith(path))) {
     return rewrite(new URL(nextPath, req.url));
