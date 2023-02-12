@@ -9,6 +9,7 @@ import {
 import { useRouter } from 'next/router';
 import AppLayout from '~/components/Layout/AppLayout';
 import { emotionTheme, GlobalStyles } from '~/styles';
+import ToastContainer from '~/components/common/Toast/components/ToastContainer';
 
 const noneLayoutPaths = ['/oauth/kakao', '/oauth/google'];
 
@@ -29,6 +30,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             <Layout>
               <Component {...pageProps} />
             </Layout>
+            <ToastContainer />
           </ThemeProvider>
         </Hydrate>
       </QueryClientProvider>
