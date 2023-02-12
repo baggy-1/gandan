@@ -36,7 +36,7 @@ const Headline = ({ textWidth = '70%' }: Props) => {
         <span
           css={css`
             width: ${textWidth};
-            height: 1rem;
+            height: 2.5rem;
             background-color: rgba(0, 0, 0, 0.25);
           `}
         />

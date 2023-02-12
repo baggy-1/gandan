@@ -1,20 +1,19 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 type Props = Pick<News, 'id' | 'title' | 'thumbnail'>;
 
 const NewsCard = ({ id, title, thumbnail }: Props) => {
-  const { push } = useRouter();
   const { typography, colors } = useTheme();
 
   return (
-    <Box
+    <Link
       css={css`
         cursor: pointer;
       `}
-      onClick={() => push(`/news/${id}`)}
+      href={`/news/${id}`}
     >
       <Box
         css={css`
@@ -64,7 +63,7 @@ const NewsCard = ({ id, title, thumbnail }: Props) => {
           </Text>
         </Flex>
       </Box>
-    </Box>
+    </Link>
   );
 };
 

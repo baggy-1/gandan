@@ -5,15 +5,22 @@ import Image from 'next/image';
 interface AvatarProps {
   profile?: string;
   onClick?: () => void;
+  width?: number;
+  height?: number;
 }
 
-const UserAvatar = ({ profile, onClick }: AvatarProps) => {
+const UserAvatar = ({
+  profile,
+  onClick,
+  width = 32,
+  height = 32,
+}: AvatarProps) => {
   return profile ? (
     <Image
       src={profile}
       alt="user-profile"
-      width={32}
-      height={32}
+      width={width}
+      height={height}
       css={css`
         border-radius: 50%;
         cursor: pointer;
