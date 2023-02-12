@@ -1,9 +1,10 @@
 import { Flex, Box, Text, Center, Button } from '@chakra-ui/react';
-import Link from 'next/link';
 import { css, useTheme } from '@emotion/react';
 import { ChevronLeft } from '@svgs/common';
+import { useRouter } from 'next/router';
 
 const LoginNav = () => {
+  const { back } = useRouter();
   const { colors, typography } = useTheme();
 
   return (
@@ -31,16 +32,14 @@ const LoginNav = () => {
             width: 33%;
           `}
         >
-          <Button>
-            <Link
-              href="/"
-              css={css`
-                width: 2rem;
-                height: 2rem;
-              `}
-            >
-              <ChevronLeft />
-            </Link>
+          <Button
+            css={css`
+              width: 2rem;
+              height: 2rem;
+            `}
+            onClick={back}
+          >
+            <ChevronLeft />
           </Button>
         </Box>
         <Center

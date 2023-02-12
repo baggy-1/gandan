@@ -7,7 +7,7 @@ import { useQueryMe } from '~/services/client/user/queries';
 import { UserAvatar } from '~/components/common';
 
 const Nav = () => {
-  const { pathname, push } = useRouter();
+  const { pathname, push, back } = useRouter();
   const { isDetail } = getRouterState(pathname);
   const { typography, colors } = useTheme();
   const { data: me } = useQueryMe();
@@ -44,20 +44,20 @@ const Nav = () => {
         >
           {isDetail && (
             <Link href="/">
-              <ChevronLeft stroke={colors.white} />
+              <button onClick={back} type="button">
+                <ChevronLeft stroke={colors.white} />
+              </button>
             </Link>
           )}
         </Flex>
-        <Button>
-          <Link href="/">
-            <Text
-              css={css`
-                ${typography.headline5}
-              `}
-            >
-              GD News
-            </Text>
-          </Link>
+        <Button onClick={() => push('/')}>
+          <Text
+            css={css`
+              ${typography.headline5}
+            `}
+          >
+            GD News
+          </Text>
         </Button>
         <Flex
           justifyContent="flex-end"
