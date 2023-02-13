@@ -1,10 +1,14 @@
 import Grid from '~/components/common/Grid';
 import NewsCardSkeleton from '../NewsCard';
 
-const NewsList = () => {
+interface Props {
+  count?: number;
+}
+
+const NewsList = ({ count = 6 }: Props) => {
   return (
     <Grid>
-      {Array(6)
+      {Array(count)
         .fill(0)
         .map((_, index) => {
           // eslint-disable-next-line react/no-array-index-key
