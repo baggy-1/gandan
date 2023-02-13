@@ -10,7 +10,7 @@ import {
 import { useQueryBookmark } from '~/services/client/bookmark/queries';
 import { useQueryMe } from '~/services/client/user';
 import { getKoreaDate } from '~/utils';
-import { useToast } from '~/components/common/Toast';
+import { useToast } from '~/components/common';
 
 type Props = Pick<News, 'id' | 'title' | 'thumbnail' | 'createAt'>;
 

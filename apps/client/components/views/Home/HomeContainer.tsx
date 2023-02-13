@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
-import { Flex } from '~/components/common';
-import NewsCard from '~/components/common/NewsCard';
-import { NewsListSkeleton } from '~/components/common/Skeleton';
+import { Badge, Flex, NewsCard, NewsListSkeleton } from '~/components/common';
 import { useQueryNews } from '~/services/client/news';
+import { getKoreaDate } from '~/utils';
 
 const HomeContainer = () => {
   const { data: newslist } = useQueryNews();
@@ -10,7 +9,12 @@ const HomeContainer = () => {
   return (
     <Flex wrap="wrap" justify="center" gap="1rem">
       {newslist.map(news => {
-        return <NewsCard key={news.id} {...news} />;
+        const today = getKoreaDate(new Date(Date.now())).date;
+        const createDay = getKoreaDate(new Date(news.createAt)).date;
+        const badge =
+          today === createDay ? <Badge colorScheme="green">NEW</Badge> : null;
+
+        return <NewsCard key={news.id} {...news} badge={badge} />;
       })}
     </Flex>
   );
