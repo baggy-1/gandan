@@ -35,18 +35,37 @@ const Header = ({ id, title, thumbnail, createAt }: Props) => {
     }
 
     if (isCheckedBookmark) {
-      deleteBookmarkMutate(id);
+      deleteBookmarkMutate(id, {
+        onSuccess: () => {
+          toast({
+            title: '북마크가 삭제되었습니다.',
+            status: 'success',
+            duration: 1000,
+          });
+        },
+      });
       return;
     }
 
     const { datetime } = getKoreaDate(new Date());
 
-    createBookmarkMutate({
-      id,
-      title,
-      thumbnail,
-      createAt: datetime,
-    });
+    createBookmarkMutate(
+      {
+        id,
+        title,
+        thumbnail,
+        createAt: datetime,
+      },
+      {
+        onSuccess: () => {
+          toast({
+            title: '북마크가 추가되었습니다.',
+            status: 'success',
+            duration: 1000,
+          });
+        },
+      }
+    );
   };
 
   return (

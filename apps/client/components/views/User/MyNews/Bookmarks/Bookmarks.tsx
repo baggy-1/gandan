@@ -38,7 +38,7 @@ const BookmarksContainer = () => {
 
 const SuspenseBookmarksContainer = () => {
   return (
-    <Suspense fallback={<NewsListSkeleton />}>
+    <Suspense fallback={<NewsListSkeleton count={4} />}>
       <BookmarksContainer />
     </Suspense>
   );
