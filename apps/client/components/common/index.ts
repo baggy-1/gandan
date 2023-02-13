@@ -6,3 +6,4 @@ export { default as NewsCard } from './NewsCard';
 export { default as Portal } from './Portal';
 export * from './Skeleton';
 export * from './Toast';
+export { default as Badge } from './Badge';
