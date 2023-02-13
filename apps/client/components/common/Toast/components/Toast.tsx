@@ -22,7 +22,6 @@ const Toast = ({
         position: relative;
         width: 20rem;
         height: auto;
-        background-color: #e2e2e2;
         animation: ${isClosed ? keyframes.scaleOut : keyframes.bottomIn} 0.3s
           ease-in-out;
         background-color: ${statusColors[status]};
