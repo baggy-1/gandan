@@ -1,19 +1,39 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import NewsDetailViews from '@views/NewsDetail';
-import { getNews } from '~/services/client/news/apis';
+import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { getNews, getNewsById } from '~/services/client/news/apis';
 import queryKeys from '~/services/client/querykeys';
 
 const NewsDetail = () => {
   return <NewsDetailViews />;
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext
+) => {
+  if (
+    !context.params ||
+    !context.params.id ||
+    typeof context.params.id !== 'string'
+  ) {
+    return {
+      props: {},
+    };
+  }
+
+  const {
+    params: { id },
+  } = context;
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(queryKeys.news, getNews, {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-  });
+  await queryClient.prefetchQuery(
+    queryKeys.newsById(id),
+    () => getNewsById(id),
+    {
+      cacheTime: Infinity,
+      staleTime: Infinity,
+    }
+  );
 
   return {
     props: {
@@ -24,8 +44,8 @@ export const getStaticProps = async () => {
 
 export const getStaticPaths = async () => {
   const news = await getNews();
-  const paths = news.map(item => ({
-    params: { id: item.id },
+  const paths = news.map(({ id }) => ({
+    params: { id },
   }));
 
   return {
