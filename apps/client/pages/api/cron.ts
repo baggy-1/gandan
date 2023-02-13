@@ -44,7 +44,7 @@ const cronHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res
       .status(200)
-      .json({ success: true, message: `Created news, ${id}` });
+      .json({ success: true, message: `Created news, ${id}`, id });
   } catch (error) {
     return res.status(500).json({ error });
   }
