@@ -11,6 +11,7 @@ export const getStaticProps = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(queryKeys.news, getNews, {
+    cacheTime: Infinity,
     staleTime: Infinity,
   });
 
