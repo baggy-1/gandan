@@ -1,7 +1,5 @@
 import { Suspense } from 'react';
-import { Flex } from '~/components/common';
-import NewsCard from '~/components/common/NewsCard';
-import { NewsListSkeleton } from '~/components/common/Skeleton';
+import { Flex, NewsCard, NewsListSkeleton } from '~/components/common';
 import { useQueryNews } from '~/services/client/news';
 
 const HomeContainer = () => {

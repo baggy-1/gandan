@@ -3,8 +3,7 @@ import { useTheme, css } from '@emotion/react';
 import { Suspense } from 'react';
 import { useRouter } from 'next/router';
 import { useQueryNewsById } from '~/services/client/news/queries';
-import Headline from '~/components/common/Headline';
-import { HeadlineContainerSkeleton } from '~/components/common/Skeleton';
+import { Headline, HeadlineContainerSkeleton } from '~/components/common';
 import Header from './Header';
 
 interface Props {

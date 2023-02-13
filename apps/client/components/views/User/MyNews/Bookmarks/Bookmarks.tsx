@@ -1,8 +1,6 @@
 import { Suspense } from 'react';
 import { css } from '@emotion/react';
-import Grid from '~/components/common/Grid';
-import NewsCard from '~/components/common/NewsCard';
-import { NewsListSkeleton } from '~/components/common/Skeleton';
+import { Grid, NewsCard, NewsListSkeleton } from '~/components/common';
 import { useSuspensedQueryBookmark } from '~/services/client/bookmark';
 
 const BookmarksContainer = () => {
