@@ -1,11 +1,10 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import useEnhancedEffect from '~/hooks/useEnhancedEffect';
 
 const Portal = ({ children }: PropsWithChildren) => {
   const [portalContainer, setPortalContainer] = useState<Element | null>(null);
 
-  useEnhancedEffect(() => {
+  useEffect(() => {
     const isExistPortal = document.querySelector('#portal');
 
     if (isExistPortal) {
