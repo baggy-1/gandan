@@ -10,7 +10,9 @@ const Home = () => {
 export const getStaticProps = async () => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(queryKeys.news, getNews);
+  await queryClient.prefetchQuery(queryKeys.news, getNews, {
+    staleTime: Infinity,
+  });
 
   return {
     props: {
