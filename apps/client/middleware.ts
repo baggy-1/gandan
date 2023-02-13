@@ -11,6 +11,7 @@ const excludePaths = [
   '/api/oauth/token',
   '/api/news',
   '/api/cron',
+  '/api/revalidate',
 ];
 
 const authPaths = ['/user/mynews'];
