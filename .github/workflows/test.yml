@@ -42,11 +42,11 @@ jobs:
       - name: Call Revalidate detail
         id: revalidate-detail
         run: |
-          curl --request GET \
+          curl --request POST \
           --url 'https://gandan-news.vercel.app/api/revalidate?secret=${{ secrets.REVALIDATE_SECRET }}&url=${{ steps.parse-json.outputs.id }}'
 
       - name: Call Revalidate main
         id: revalidate-main
         run: |
-          curl --request GET \
+          curl --request POST \
           --url 'https://gandan-news.vercel.app/api/revalidate?secret=${{ secrets.REVALIDATE_SECRET }}&url=/'
