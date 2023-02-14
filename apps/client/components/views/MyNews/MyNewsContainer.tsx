@@ -9,6 +9,7 @@ import Bookmarks from './Bookmarks';
 const MyNewsContainer = () => {
   const { push } = useRouter();
   const { data: me } = useSuspensedQueryMe();
+  const { nickname, profile } = me;
 
   return (
     <div
@@ -29,7 +30,7 @@ const MyNewsContainer = () => {
           align-items: center;
         `}
       >
-        <UserAvatar profile={me.profile} width={48} height={48} />
+        <UserAvatar profile={profile} width={48} height={48} />
         <div
           css={css`
             display: flex;
@@ -43,7 +44,7 @@ const MyNewsContainer = () => {
               font-weight: 500;
             `}
           >
-            {me.nickname}
+            {nickname}
           </div>
           <button
             css={css`
