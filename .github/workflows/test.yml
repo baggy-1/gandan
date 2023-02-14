@@ -2,7 +2,7 @@ name: test news
 
 on:
   schedule:
-    - cron: '*/2 * * * *' # test
+    - cron: '* * * * *' # test
 
 jobs:
   api-call:
