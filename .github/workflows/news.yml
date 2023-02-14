@@ -1,6 +1,7 @@
 name: news
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 21 * * *' # 매일 6시
 
@@ -24,28 +25,15 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Call Api
+      - name: Update News
         id: post-news
         run: |
-          RESPONSE=$(curl --request POST \
+          curl --request POST \
           --url 'https://gandan-news.vercel.app/api/cron' \
-          --header 'Authorization: ${{ secrets.CRON_NEWS_TOKEN }}')
-          echo "::set-output name=response::$RESPONSE"
+          --header 'Authorization: ${{ secrets.CRON_NEWS_TOKEN }}'
 
-      - name: Get news id
-        id: parse-json
-        run: |
-          ID=$(echo "${{ steps.post-news.outputs.response }}" | jq -r '.id')
-          echo "::set-output name=id::$ID"
-
-      - name: Call Revalidate detail
-        id: revalidate-detail
-        run: |
-          curl --request GET \
-          --url 'https://gandan-news.vercel.app/api/revalidate?secret=${{ secrets.REVALIDATE_SECRET }}&url=${{ steps.parse-json.outputs.id }}'
-
-      - name: Call Revalidate main
+      - name: Revalidate main
         id: revalidate-main
         run: |
-          curl --request GET \
+          curl --request POST \
           --url 'https://gandan-news.vercel.app/api/revalidate?secret=${{ secrets.REVALIDATE_SECRET }}&url=/'
