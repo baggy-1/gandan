@@ -14,7 +14,9 @@ const revalidateHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   } = req;
 
   if (secret !== process.env.REVALIDATE_SECRET) {
-    return res.status(401).json({ message: 'Invalid token', secret, url });
+    return res.status(401).json({
+      message: `Invalid token secret: ${secret}, url: ${url}, query: ${req.query}`,
+    });
   }
 
   if (!url || typeof url !== 'string') {
