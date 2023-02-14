@@ -1,10 +1,13 @@
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 import { Suspense } from 'react';
+import { Setting } from '~/assets/svgs/common';
 import { UserAvatar } from '~/components/common';
 import { useSuspensedQueryMe } from '~/services/client/user';
 import Bookmarks from './Bookmarks';
 
 const MyNewsContainer = () => {
+  const { push } = useRouter();
   const { data: me } = useSuspensedQueryMe();
 
   return (
@@ -29,11 +32,30 @@ const MyNewsContainer = () => {
         <UserAvatar profile={me.profile} width={48} height={48} />
         <div
           css={css`
-            font-size: 1.3rem;
-            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
           `}
         >
-          {me.nickname}
+          <div
+            css={css`
+              font-size: 1.25rem;
+              font-weight: 500;
+            `}
+          >
+            {me.nickname}
+          </div>
+          <button
+            css={css`
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            `}
+            type="button"
+            onClick={() => push('/user/profile')}
+          >
+            <Setting width="1.5rem" height="1.5rem" />
+          </button>
         </div>
       </div>
       <div

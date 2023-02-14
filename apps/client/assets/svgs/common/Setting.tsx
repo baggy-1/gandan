@@ -1,4 +1,9 @@
-const Setting = () => {
+interface Props {
+  width?: string | number;
+  height?: string | number;
+}
+
+const Setting = ({ width = '2rem', height = '2rem' }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -7,6 +12,8 @@ const Setting = () => {
       strokeWidth={1.5}
       stroke="currentColor"
       className="w-6 h-6"
+      width={width}
+      height={height}
     >
       <path
         strokeLinecap="round"
