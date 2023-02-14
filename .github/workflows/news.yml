@@ -2,7 +2,8 @@ name: news
 
 on:
   schedule:
-    - cron: '0 21 * * *' # 매일 6시
+    # - cron: '0 21 * * *' # 매일 6시
+    - cron: '20 * * * *' # test
 
 jobs:
   api-call:
@@ -39,13 +40,13 @@ jobs:
           echo "::set-output name=id::$ID"
 
       - name: Call Revalidate detail
-        id: revalidate detail
+        id: revalidate-detail
         run: |
           curl --request GET \
           --url 'https://gandan-news.vercel.app/api/revalidate?secret=${{ secrets.REVALIDATE_SECRET }}&url=${{ steps.parse-json.outputs.id }}'
 
       - name: Call Revalidate main
-        id: revalidate main
+        id: revalidate-main
         run: |
           curl --request GET \
           --url 'https://gandan-news.vercel.app/api/revalidate?secret=${{ secrets.REVALIDATE_SECRET }}&url=/'
