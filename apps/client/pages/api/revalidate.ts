@@ -5,10 +5,6 @@ const revalidateHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  if (!req.url) {
-    return res.status(400).json({ message: 'Invalid path' });
-  }
-
   const {
     query: { secret, url },
   } = req;
