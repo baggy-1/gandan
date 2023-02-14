@@ -8,7 +8,7 @@ const revalidateHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const query = getParseQuery(req.url);
 
   if (!query.secret || query.secret !== process.env.REVALIDATE_SECRET) {
-    return res.status(401).json({ message: 'Invalid token' });
+    return res.status(401).json({ message: 'Invalid token', query });
   }
 
   if (!query.url) {

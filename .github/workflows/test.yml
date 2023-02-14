@@ -35,13 +35,13 @@ jobs:
           RESPONSE=$(curl --request POST \
           --url 'https://gandan-news.vercel.app/api/cron' \
           --header 'Authorization: ${{ secrets.CRON_NEWS_TOKEN }}')
-          echo "::set-output name=response::$RESPONSE"
+          echo "{response}={$RESPONSE}" >> $GITHUB_OUTPUT
 
       - name: Get news id
         id: parse-json
         run: |
           ID=$(echo '${{ steps.post-news.outputs.response }}' | jq -r '.id')
-          echo "::set-output name=id::$ID"
+          echo "{id}={$ID}" >> $GITHUB_OUTPUT
 
       - name: Call Revalidate detail
         id: revalidate-detail
