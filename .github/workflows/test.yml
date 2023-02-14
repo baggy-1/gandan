@@ -1,8 +1,8 @@
-name: news
+name: test news
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # test
+    - cron: '*/2 * * * *' # test
 
 jobs:
   api-call:
