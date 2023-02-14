@@ -38,9 +38,9 @@ const tokenHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       access_token: token,
       expires_in: TOKEN.expiresIn,
     });
-  } catch (error: any) {
-    if (!error.code) {
-      return res.status(500).json({ message: 'Internal server error' });
+  } catch (error) {
+    if (typeof error !== 'object' || error === null || !('code' in error)) {
+      return res.status(500).json({ message: 'Internal server error', error });
     }
 
     switch (error.code) {

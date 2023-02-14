@@ -12,7 +12,7 @@ interface Thumbnail {
 }
 
 interface News {
-  id: string;
+  id: `${string}-@-news`;
   title: string;
   headlines: Headline[];
   createAt: string;

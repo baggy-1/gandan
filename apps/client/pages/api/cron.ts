@@ -21,7 +21,7 @@ const cronHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const { date, dateKorea, datetime } = getKoreaDate(new Date());
-  const id = `${date}-@-news`;
+  const id = `${date}-@-news` as const;
 
   try {
     const news = await getNewsById(id);

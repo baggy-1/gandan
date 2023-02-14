@@ -8,7 +8,7 @@ interface User {
 }
 
 interface Bookmark {
-  id: string;
+  id: News['id'];
   title: string;
   thumbnail: Thumbnail;
   createAt: string | Date;
