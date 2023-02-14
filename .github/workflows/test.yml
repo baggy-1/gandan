@@ -30,7 +30,7 @@ jobs:
         run: |
           curl --request POST \
           --url 'https://gandan-news.vercel.app/api/cron' \
-          --header 'Authorization: ${{ secrets.CRON_NEWS_TOKEN }}')
+          --header 'Authorization: ${{ secrets.CRON_NEWS_TOKEN }}'
 
       - name: Call Revalidate main
         id: revalidate-main
