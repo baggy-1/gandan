@@ -47,6 +47,15 @@ const ProfileContainer = () => {
       return;
     }
 
+    if (newNickname.length > 10) {
+      toast({
+        title: '닉네임은 10자 이내로 입력해주세요.',
+        status: 'error',
+      });
+
+      return;
+    }
+
     updateNickname(
       { nickname: newNickname },
       {
