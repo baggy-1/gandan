@@ -1,4 +1,4 @@
-import MyNewsViews from '@views/User/MyNews';
+import MyNewsViews from '@views/MyNews';
 
 const UserNewsList = () => {
   return <MyNewsViews />;

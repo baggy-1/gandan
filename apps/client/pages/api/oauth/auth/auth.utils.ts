@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import { env } from '~/constants';
 
 export const getParseKakaoUser = (user: Kakao.User) => {
   const {
@@ -11,20 +10,22 @@ export const getParseKakaoUser = (user: Kakao.User) => {
   } = user;
 
   return {
-    id: `${id}-@-${env.KAKAO_ID_FLAG}`,
+    id: `${id}-@-kakao`,
     nickname,
     profile: profile_image_url,
     email,
-  };
+    name: nickname,
+  } as const;
 };
 
 export const getParseGoogleUser = (user: Google.User) => {
   const { id, email, name, picture } = user;
 
   return {
-    id: `${id}-@-${env.GOOGLE_ID_FLAG}`,
+    id: `${id}-@-google`,
     nickname: name,
     profile: picture,
     email,
-  };
+    name,
+  } as const;
 };

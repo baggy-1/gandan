@@ -1,14 +1,17 @@
+type LoginType = 'kakao' | 'google';
+
 interface User {
-  id: string;
+  id: `${string}-@-${LoginType}`;
   nickname: string;
   profile?: string;
   email?: string;
   createAt: string | Date;
-  loginType: string;
+  loginType: LoginType;
+  name: string;
 }
 
 interface Bookmark {
-  id: string;
+  id: News['id'];
   title: string;
   thumbnail: Thumbnail;
   createAt: string | Date;

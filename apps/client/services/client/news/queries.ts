@@ -4,7 +4,6 @@ import { getNews, getNewsById } from './apis';
 
 export const useQueryNews = () => {
   return useSuspensedQuery(queryKeys.news, getNews, {
-    refetchOnWindowFocus: false,
     cacheTime: Infinity,
     staleTime: Infinity,
   });
@@ -12,7 +11,6 @@ export const useQueryNews = () => {
 
 export const useQueryNewsById = (id: string) => {
   return useSuspensedQuery(queryKeys.newsById(id), () => getNewsById(id), {
-    refetchOnWindowFocus: false,
     cacheTime: Infinity,
     staleTime: Infinity,
   });

@@ -2,14 +2,17 @@ import { Box, Card, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useTheme, css } from '@emotion/react';
 import { CursorArrow } from '~/assets/svgs/common';
+import { useNewsDetail } from '~/components/views/NewsDetail/NewsDetailContainer';
 
 interface Props {
   headline: Headline;
 }
 
+// TODO : News Detail에 종속적이므로 추후에 분리
 const Headline = ({ headline }: Props) => {
   const { link, press, title } = headline;
   const { typography, colors } = useTheme();
+  const { isFontSizeLarge } = useNewsDetail();
 
   return (
     <Link href={link}>
@@ -42,7 +45,7 @@ const Headline = ({ headline }: Props) => {
           </Flex>
           <span
             css={css`
-              ${typography.headline6}
+              ${isFontSizeLarge ? typography.headline4 : typography.headline6}
             `}
           >
             {title}

@@ -14,7 +14,7 @@ import { getParseGoogleUser, getParseKakaoUser } from './auth.utils';
 const providers = {
   kakao: 'kakao',
   google: 'google',
-};
+} as const;
 
 const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {

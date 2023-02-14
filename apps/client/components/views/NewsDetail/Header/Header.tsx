@@ -2,7 +2,11 @@ import { Box, Center, Flex, Text } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { Bookmark } from '~/assets/svgs/common';
+import {
+  Bookmark,
+  MagnifyingGlassPlus,
+  MagnifyingGlassMinus,
+} from '~/assets/svgs/common';
 import {
   useCreateBookmark,
   useDeleteBookmark,
@@ -11,6 +15,7 @@ import { useQueryBookmark } from '~/services/client/bookmark/queries';
 import { useQueryMe } from '~/services/client/user';
 import { getKoreaDate } from '~/utils';
 import { useToast } from '~/components/common';
+import { useNewsDetail } from '../NewsDetailContainer';
 
 type Props = Pick<News, 'id' | 'title' | 'thumbnail' | 'createAt'>;
 
@@ -21,6 +26,7 @@ const Header = ({ id, title, thumbnail, createAt }: Props) => {
   const { mutate: createBookmarkMutate } = useCreateBookmark();
   const { mutate: deleteBookmarkMutate } = useDeleteBookmark();
   const toast = useToast();
+  const { isFontSizeLarge, setIsFontSizeLarge } = useNewsDetail();
 
   const isCheckedBookmark = bookmarks?.some(bookmark => bookmark.id === id);
 
@@ -94,11 +100,16 @@ const Header = ({ id, title, thumbnail, createAt }: Props) => {
       </Box>
       <Center
         css={css`
-          cursor: pointer;
+          display: flex;
+          gap: 1rem;
         `}
-        onClick={onClickBookmarkAction}
       >
-        <Bookmark fill={isCheckedBookmark} />
+        <button type="button" onClick={() => setIsFontSizeLarge(prev => !prev)}>
+          {isFontSizeLarge ? <MagnifyingGlassMinus /> : <MagnifyingGlassPlus />}
+        </button>
+        <button onClick={onClickBookmarkAction} type="button">
+          <Bookmark fill={isCheckedBookmark} />
+        </button>
       </Center>
     </Flex>
   );

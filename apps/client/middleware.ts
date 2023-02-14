@@ -14,7 +14,7 @@ const excludePaths = [
   '/api/revalidate',
 ];
 
-const authPaths = ['/user/mynews'];
+const authPaths = ['/user/mynews', '/user/profile'];
 
 const middleware = async (req: NextRequest) => {
   const {
