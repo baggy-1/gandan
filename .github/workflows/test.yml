@@ -2,7 +2,7 @@ name: news
 
 on:
   schedule:
-    - cron: '0 21 * * *' # 매일 6시
+    - cron: '*/10 * * * *' # test
 
 jobs:
   api-call:
