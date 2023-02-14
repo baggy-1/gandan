@@ -9,13 +9,13 @@ const revalidateHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: 'Invalid path' });
   }
 
-  const { secret, url } = getParseQuery(req.url);
+  const {
+    query: { secret, url },
+  } = req;
 
   if (secret !== process.env.REVALIDATE_SECRET) {
     return res.status(401).json({
-      message: `Invalid token secret: ${secret}, url: ${url}, query: ${getParseQuery(
-        req.url
-      )}`,
+      message: 'Invalid token secret',
     });
   }
 
@@ -29,16 +29,6 @@ const revalidateHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   } catch (error) {
     return res.status(500).json({ error, message: 'Error revalidating' });
   }
-};
-
-const getParseQuery = (url: string) => {
-  const queryUrl = url.split('?').length === 1 ? '' : url.split('?')[1];
-  const query = queryUrl.split('&').reduce((acc, cur) => {
-    const [key, value] = cur.split('=');
-    return { ...acc, [key]: value };
-  }, {} as { secret?: string; url?: string });
-
-  return query;
 };
 
 export default revalidateHandler;

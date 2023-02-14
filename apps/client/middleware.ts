@@ -28,14 +28,14 @@ const middleware = async (req: NextRequest) => {
       req.cookies.has(TOKEN.accessToken) && req.cookies.has(TOKEN.refreshToken);
 
     if (isExistToken) {
-      return rewrite(new URL(nextPath, req.url));
+      return rewrite(req.url);
     }
 
     return redirect(new URL('/login', req.url));
   }
 
   if (excludePaths.find(path => nextPath.startsWith(path))) {
-    return rewrite(new URL(nextPath, req.url));
+    return rewrite(req.url);
   }
 
   const token = headers.get('Authorization')?.replace('Bearer ', '');
