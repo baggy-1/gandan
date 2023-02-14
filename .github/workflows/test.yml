@@ -28,22 +28,9 @@ jobs:
       - name: Call Api
         id: post-news
         run: |
-          RESPONSE=$(curl --request POST \
+          curl --request POST \
           --url 'https://gandan-news.vercel.app/api/cron' \
           --header 'Authorization: ${{ secrets.CRON_NEWS_TOKEN }}')
-          echo "response=$RESPONSE" >> $GITHUB_OUTPUT
-
-      - name: Get news id
-        id: parse-json
-        run: |
-          ID=$(echo '${{ steps.post-news.outputs.response }}' | jq -r '.id')
-          echo "id=$ID" >> $GITHUB_OUTPUT
-
-      - name: Call Revalidate detail
-        id: revalidate-detail
-        run: |
-          curl --request POST \
-          --url 'https://gandan-news.vercel.app/api/revalidate?secret=${{ secrets.REVALIDATE_SECRET }}&url=${{ steps.parse-json.outputs.id }}'
 
       - name: Call Revalidate main
         id: revalidate-main
