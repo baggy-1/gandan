@@ -31,10 +31,6 @@ jobs:
           RESPONSE=$(curl --request POST \
           --url 'https://gandan-news.vercel.app/api/cron' \
           --header 'Authorization: ${{ secrets.CRON_NEWS_TOKEN }}')
-          echo "::set-output name=response::$RESPONSE"
-          RESPONSE=$(curl --request POST \
-          --url 'https://gandan-news.vercel.app/api/cron' \
-          --header 'Authorization: ${{ secrets.CRON_NEWS_TOKEN }}')
           echo "{response}={$RESPONSE}" >> $GITHUB_OUTPUT
 
       - name: Get news id
