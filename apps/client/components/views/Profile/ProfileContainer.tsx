@@ -1,20 +1,65 @@
 import { Box, Container, Spinner, Center } from '@chakra-ui/react';
 import { Suspense, useRef, useState, useEffect } from 'react';
 import { css, useTheme } from '@emotion/react';
-import { Flex, UserAvatar } from '~/components/common';
-import { useSuspensedQueryMe } from '~/services/client/user';
+import { Flex, UserAvatar, useToast } from '~/components/common';
+import { useSuspensedQueryMe, useUpdateMe } from '~/services/client/user';
 import useInput from '~/hooks/useInput';
 
 const ProfileContainer = () => {
   const { colors } = useTheme();
   const { data: me } = useSuspensedQueryMe();
-  const { profile, nickname, email, loginType } = me;
+  const { mutate: updateNickname } = useUpdateMe();
+  const { profile, nickname, email, loginType, name } = me;
   const { value: newNickname, onChange: onChangeNickname } = useInput(nickname);
   const [isEdit, setIsEdit] = useState(false);
   const refNickname = useRef<HTMLInputElement | null>(null);
+  const toast = useToast();
 
   const toggleEdit = () => {
     setIsEdit(prev => !prev);
+  };
+
+  const onSubmitNickname = (
+    event:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (!isClickType(event) && !isKeyDownEnter(event)) {
+      return;
+    }
+
+    if (!newNickname) {
+      toast({
+        title: '닉네임을 입력해주세요.',
+        status: 'error',
+      });
+
+      return;
+    }
+
+    if (nickname === newNickname) {
+      toast({
+        title: '변경사항이 없습니다.',
+        status: 'warning',
+      });
+
+      setIsEdit(false);
+      return;
+    }
+
+    updateNickname(
+      { nickname: newNickname },
+      {
+        onSuccess: () => {
+          toast({
+            title: '닉네임이 성공적으로 변경되었습니다.',
+            status: 'success',
+          });
+        },
+      }
+    );
+
+    setIsEdit(false);
   };
 
   useEffect(() => {
@@ -79,7 +124,8 @@ const ProfileContainer = () => {
                       color: ${colors.primary};
                     `}
                     type="button"
-                    onClick={toggleEdit}
+                    onClick={onSubmitNickname}
+                    tabIndex={0}
                   >
                     저장
                   </button>
@@ -110,6 +156,7 @@ const ProfileContainer = () => {
                 ref={refNickname}
                 value={newNickname}
                 onChange={onChangeNickname}
+                onKeyDown={onSubmitNickname}
                 disabled={!isEdit}
               />
             </Flex>
@@ -180,7 +227,7 @@ const ProfileContainer = () => {
                 padding-left: 1rem;
               `}
             >
-              {nickname}
+              {name}
             </p>
           </Flex>
         </Flex>
@@ -198,3 +245,17 @@ const SuspenseProfileContainer = () => {
 };
 
 export default SuspenseProfileContainer;
+
+const isClickType = (
+  event: React.KeyboardEvent | React.MouseEvent
+): event is React.MouseEvent => {
+  const { type } = event;
+
+  return type === 'click';
+};
+
+const isKeyDownEnter = (event: React.KeyboardEvent) => {
+  const { key } = event;
+
+  return key === 'Enter';
+};

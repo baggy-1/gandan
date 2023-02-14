@@ -28,3 +28,7 @@ export const getUser = (id: string) => {
 export const createUser = (id: string, user: User) => {
   return serverApi.put<null, User>(`/users/${id}.json`, user);
 };
+
+export const updateUser = (id: string, user: Partial<User>) => {
+  return serverApi.patch<null, Partial<User>>(`/users/${id}.json`, user);
+};
