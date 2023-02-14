@@ -27,7 +27,9 @@ const cronHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const news = await getNewsById(id);
 
     if (news) {
-      return res.status(200).json({ success: true, message: 'Already exist' });
+      return res
+        .status(200)
+        .json({ success: true, message: 'Already exist', id });
     }
 
     const googleNews = await getGoogleHeadlineNews();
