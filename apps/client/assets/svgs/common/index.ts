@@ -5,3 +5,5 @@ export { default as Checked } from './Checked';
 export { default as Info } from './Info';
 export { default as Close } from './Close';
 export { default as Setting } from './Setting';
+export { default as MagnifyingGlassPlus } from './MagnifyingGlassPlus';
+export { default as MagnifyingGlassMinus } from './MagnifyingGlassMinus';
