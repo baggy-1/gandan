@@ -7,3 +7,4 @@ export { default as Portal } from './Portal';
 export * from './Skeleton';
 export * from './Toast';
 export { default as Badge } from './Badge';
+export { default as OpenGraph } from './OpenGraph';

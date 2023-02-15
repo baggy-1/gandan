@@ -1,11 +1,21 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import NewsDetailViews from '@views/NewsDetail';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { OpenGraph } from '~/components/common';
 import { getNews, getNewsById } from '~/services/client/news/apis';
 import queryKeys from '~/services/client/querykeys';
 
-const NewsDetail = () => {
-  return <NewsDetailViews />;
+interface Props {
+  id: string;
+}
+
+const NewsDetail = ({ id }: Props) => {
+  return (
+    <>
+      <OpenGraph title="오늘의 뉴스" path={`/news/${id}`} />
+      <NewsDetailViews />
+    </>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async (
@@ -38,6 +48,7 @@ export const getStaticProps: GetStaticProps = async (
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      id,
     },
   };
 };

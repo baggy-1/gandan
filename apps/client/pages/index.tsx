@@ -1,10 +1,16 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import HomeViews from '@views/Home/HomeContainer';
+import { OpenGraph } from '~/components/common';
 import { getNews } from '~/services/client/news';
 import queryKeys from '~/services/client/querykeys';
 
 const Home = () => {
-  return <HomeViews />;
+  return (
+    <>
+      <OpenGraph title="홈" path="/" />
+      <HomeViews />
+    </>
+  );
 };
 
 export const getStaticProps = async () => {
