@@ -83,12 +83,13 @@ const ProfileContainer = () => {
         display: flex;
         flex-direction: column;
         padding: 1rem;
+        width: 100%;
       `}
     >
-      <Center flexDirection="column" gap="2rem">
+      <Center flexDirection="column" gap="2rem" width="100%" maxWidth="30rem">
         <Box
           css={css`
-            width: 20rem;
+            width: 100%;
             padding: 1rem 0;
           `}
         >
@@ -156,7 +157,7 @@ const ProfileContainer = () => {
                   border-radius: 0.5rem;
                   border: 1px solid ${colors.grayE8};
                   background-color: ${isEdit ? colors.white : colors.grayE8};
-                  width: 20rem;
+                  width: 100%;
                   height: 2.5rem;
                   padding: 1rem;
                   outline: none;
@@ -195,7 +196,7 @@ const ProfileContainer = () => {
                 border-radius: 0.5rem;
                 border: 1px solid ${colors.grayE8};
                 background-color: ${colors.grayE8};
-                width: 20rem;
+                width: 100%;
                 height: 2.5rem;
                 display: flex;
                 align-items: center;
@@ -212,7 +213,7 @@ const ProfileContainer = () => {
                 border-radius: 0.5rem;
                 border: 1px solid ${colors.grayE8};
                 background-color: ${colors.grayE8};
-                width: 20rem;
+                width: 100%;
                 height: 2.5rem;
                 display: flex;
                 align-items: center;
@@ -229,7 +230,7 @@ const ProfileContainer = () => {
                 border-radius: 0.5rem;
                 border: 1px solid ${colors.grayE8};
                 background-color: ${colors.grayE8};
-                width: 20rem;
+                width: 100%;
                 height: 2.5rem;
                 display: flex;
                 align-items: center;
