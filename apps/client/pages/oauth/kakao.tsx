@@ -10,10 +10,6 @@ const OAuthKakaoPage = () => {
   const toast = useToast();
 
   useEffect(() => {
-    if (!query.code || typeof query.code !== 'string') {
-      return;
-    }
-
     if (query.error) {
       toast({
         title: '로그인에 실패하였습니다.',
@@ -22,6 +18,10 @@ const OAuthKakaoPage = () => {
       });
 
       replace('/');
+    }
+
+    if (!query.code || typeof query.code !== 'string') {
+      return;
     }
 
     mutate(query.code, {
