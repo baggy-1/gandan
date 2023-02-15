@@ -1,7 +1,13 @@
 import LoginViews from '@views/Login';
+import { OpenGraph } from '~/components/common';
 
 const login = () => {
-  return <LoginViews />;
+  return (
+    <>
+      <OpenGraph title="로그인" path="/login" />
+      <LoginViews />
+    </>
+  );
 };
 
 export default login;

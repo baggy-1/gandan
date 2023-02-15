@@ -24,7 +24,7 @@ const Document = () => {
 };
 
 const Meta = () => {
-  const { app, description, domain } = content;
+  const { app } = content;
 
   return (
     <>
@@ -32,31 +32,12 @@ const Meta = () => {
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="apple-mobile-web-app-name" content={app} />
-      <meta name="description" content={description} />
       <meta name="format-detection" content="telephone=no" />
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="msapplication-config" content="/browserconfig.xml" />
       <meta name="msapplication-TileColor" content="#2B5797" />
       <meta name="msapplication-tap-highlight" content="no" />
       <meta name="theme-color" content="#000000" />
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:url" content={domain} />
-      <meta name="twitter:name" content={app} />
-      <meta name="twitter:description" content={description} />
-      <meta
-        name="twitter:image"
-        content={`${domain}/icons/android-chrome-192x192.png`}
-      />
-      <meta name="twitter:creator" content="@gandannews" />
-      <meta property="og:type" content="website" />
-      <meta property="og:name" content={app} />
-      <meta property="og:description" content={description} />
-      <meta property="og:site_name" content={app} />
-      <meta property="og:url" content={domain} />
-      <meta
-        property="og:image"
-        content={`${domain}/icons/apple-touch-icon.png`}
-      />
     </>
   );
 };
