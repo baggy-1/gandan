@@ -1,12 +1,14 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import { loginOAuthKakao, loginOAuthGoogle } from './apis';
 import { token } from '~/constants';
 import { getExpriesDate } from '~/utils';
 import api from '../api';
+import queryKeys from '../querykeys';
 
 export const useOAuthLogin = (provider: OAuth.Provider) => {
   const mutationFn = getProviderMutationFn(provider);
+  const client = useQueryClient();
 
   return useMutation({
     mutationFn,
@@ -23,6 +25,8 @@ export const useOAuthLogin = (provider: OAuth.Provider) => {
         // eslint-disable-next-line dot-notation
         'Authorization'
       ] = `Bearer ${tokenInfo.access_token}`;
+
+      client.invalidateQueries(queryKeys.me);
     },
   });
 };
