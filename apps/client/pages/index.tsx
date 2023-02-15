@@ -7,7 +7,7 @@ import queryKeys from '~/services/client/querykeys';
 const Home = () => {
   return (
     <>
-      <OpenGraph title="홈" path="/" />
+      <OpenGraph path="/" />
       <HomeViews />
     </>
   );
