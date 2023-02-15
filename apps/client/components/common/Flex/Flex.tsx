@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { PropsWithChildren } from 'react';
+import { HTMLAttributes } from 'react';
 
-interface Props extends PropsWithChildren {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   direction?: 'row' | 'column';
   justify?:
     | 'flex-start'
@@ -13,6 +13,8 @@ interface Props extends PropsWithChildren {
   align?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
   wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
   gap?: string;
+  width?: string;
+  maxWidth?: string;
 }
 
 const Flex = ({
@@ -22,6 +24,8 @@ const Flex = ({
   align = 'flex-start',
   wrap = 'nowrap',
   gap = '0',
+  width = '100%',
+  maxWidth = '100%',
 }: Props) => {
   return (
     <div
@@ -32,6 +36,8 @@ const Flex = ({
         align-items: ${align};
         flex-wrap: ${wrap};
         gap: ${gap};
+        width: ${width};
+        max-width: ${maxWidth};
       `}
     >
       {children}

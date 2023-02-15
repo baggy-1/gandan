@@ -1,6 +1,6 @@
 const BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? 'https://gandan-news.vercel.app/'
+    ? 'https://gandan-news.vercel.app'
     : 'http://localhost:3000';
 
 const env = {
