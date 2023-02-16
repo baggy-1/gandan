@@ -1,10 +1,8 @@
 import { Box, Card, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
-import { useState } from 'react';
 import { useTheme, css } from '@emotion/react';
 import { CursorArrow } from '~/assets/svgs/common';
 import { useNewsDetail } from '~/components/views/NewsDetail/NewsDetailContainer';
-import Portal from '../Portal';
 
 interface Props {
   headline: Headline;
@@ -15,24 +13,10 @@ const Headline = ({ headline }: Props) => {
   const { link, press, title } = headline;
   const { typography, colors } = useTheme();
   const { isFontSizeLarge } = useNewsDetail();
-  const [openWebView, setOpenWebView] = useState(false);
 
   return (
-    // <Link href={link}>
-    <>
-      {openWebView && (
-        <Portal>
-          <webview
-            src={link}
-            css={css`
-              display: block;
-              width: 100%;
-              height: 100vh;
-            `}
-          />
-        </Portal>
-      )}
-      <Card onClick={() => setOpenWebView(true)}>
+    <Link href={link}>
+      <Card>
         <Flex
           css={css`
             gap: 0.5rem;
@@ -68,8 +52,7 @@ const Headline = ({ headline }: Props) => {
           </span>
         </Flex>
       </Card>
-    </>
-    // </Link>
+    </Link>
   );
 };
 
