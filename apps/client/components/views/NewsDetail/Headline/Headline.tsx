@@ -8,7 +8,6 @@ interface Props {
   headline: Headline;
 }
 
-// TODO : News Detail에 종속적이므로 추후에 분리
 const Headline = ({ headline }: Props) => {
   const { link, press, title } = headline;
   const { typography, colors } = useTheme();
