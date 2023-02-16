@@ -20,9 +20,10 @@ const sizes = {
 } as const;
 
 export const getRandomThumbnail = (seed: string) => {
-  const sm = `https://picsum.photos/seed/${seed}/${sizes.sm}.webp`;
-  const md = `https://picsum.photos/seed/${seed}/${sizes.md}.webp`;
-  const lg = `https://picsum.photos/seed/${seed}/${sizes.lg}.webp`;
+  const _seed = encodeURIComponent(seed);
+  const sm = `https://picsum.photos/seed/${_seed}/${sizes.sm}.webp`;
+  const md = `https://picsum.photos/seed/${_seed}/${sizes.md}.webp`;
+  const lg = `https://picsum.photos/seed/${_seed}/${sizes.lg}.webp`;
 
   return {
     sm,
