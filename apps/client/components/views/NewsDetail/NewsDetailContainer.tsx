@@ -51,7 +51,6 @@ const NewsDetailContainer = () => {
   return <NewsDetail id={id} />;
 };
 
-// TODO : 추후에 분리
 interface NewsDetailValue {
   isFontSizeLarge: boolean;
   setIsFontSizeLarge: React.Dispatch<React.SetStateAction<boolean>>;
