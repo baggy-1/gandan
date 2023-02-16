@@ -105,5 +105,7 @@
   "background_color": "#ffffff",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "categories": ["news"],
+  "description": "앱을 설치하여 간편하게 매일 아침 6시마다 헤드라인 뉴스를 받아보세요. 다양한 카테고리 뉴스도 함께 실시간으로 제공됩니다."
 }

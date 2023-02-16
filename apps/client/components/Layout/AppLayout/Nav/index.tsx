@@ -2,15 +2,17 @@ import { Flex, Text, Button } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ChevronLeft } from '@svgs/common';
+import { ChevronLeft, Download } from '@svgs/common';
 import { useQueryMe } from '~/services/client/user/queries';
 import { UserAvatar } from '~/components/common';
+import { useBeforeInstallPrompt } from '~/hooks/';
 
 const Nav = () => {
   const { pathname, push, back } = useRouter();
   const { isDetail } = getRouterState(pathname);
   const { typography, colors } = useTheme();
   const { data: me } = useQueryMe();
+  const { installable, openInstallPrompt } = useBeforeInstallPrompt();
 
   return (
     <header
@@ -68,8 +70,14 @@ const Nav = () => {
             margin-left: auto;
             justify-content: flex-end;
             align-items: center;
+            gap: 1rem;
           `}
         >
+          {installable && (
+            <button onClick={openInstallPrompt} type="button">
+              <Download width="1.5rem" height="1.5rem" />
+            </button>
+          )}
           {me ? (
             <UserAvatar
               profile={me.profile}
