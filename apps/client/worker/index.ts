@@ -34,11 +34,9 @@ self.addEventListener('push', event => {
         lang: 'ko-KR',
         tag: 'gandan-news',
         vibrate: [200, 100, 200, 100, 200, 100, 200],
-        image:
-          'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x192.png',
+        image: 'https://gandan-news.vercel.app/icons/notification-image.jpg',
         icon: 'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x192.png',
-        badge:
-          'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x192.png',
+        badge: 'https://gandan-news.vercel.app/icons/android-icon-96x96.png',
       });
     })
   );
