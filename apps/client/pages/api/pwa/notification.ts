@@ -42,11 +42,13 @@ const notificationHandler = async (
       link: 'https://gandan-news.vercel.app',
     };
 
-    subscriptions.forEach(async subscription => {
+    const sendNotifications = subscriptions.map(async subscription => {
       await webpush.sendNotification(subscription, JSON.stringify(payload));
     });
 
-    return res.status(200).json({ message: 'success', subscriptions });
+    await Promise.allSettled(sendNotifications);
+
+    return res.status(200).json({ message: 'success' });
   } catch (error) {
     return res.status(500).json({ error });
   }
