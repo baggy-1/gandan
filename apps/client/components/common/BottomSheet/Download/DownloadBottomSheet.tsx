@@ -3,12 +3,14 @@ import DownloadContainer from './DownloadContainer';
 
 interface Props {
   onClose: () => void;
+  installable: boolean;
+  openInstallPrompt: () => void;
 }
 
-const DownloadBottomSheet = ({ onClose }: Props) => {
+const DownloadBottomSheet = ({ onClose, ...rest }: Props) => {
   return (
     <BottomSheet onClose={onClose}>
-      <DownloadContainer />
+      <DownloadContainer {...rest} />
     </BottomSheet>
   );
 };
