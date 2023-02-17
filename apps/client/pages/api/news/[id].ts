@@ -1,12 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import {
-  getGoogleHeadlineNews,
-  getNewsById,
-  createNewsById,
-} from '~/services/server/news/apis';
-import getKoreaDate from '~/utils/getKoreaDate';
-import { getParseHeadlines, getRandomThumbnail } from './[id].util';
+import { getNewsById } from '~/services/server/news/apis';
 
 const newsIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
@@ -22,25 +16,7 @@ const newsIdHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const news = await getNewsById(newsId);
 
-    if (news) {
-      return res.status(200).json(news);
-    }
-
-    const googleNews = await getGoogleHeadlineNews();
-    const headlines = getParseHeadlines(googleNews);
-    const { date, datetime, dateKorea } = getKoreaDate(new Date());
-    const id = `${date}-@-news` as const;
-    const thumbnail = getRandomThumbnail(headlines[0].title);
-
-    const newNews = await createNewsById(id, {
-      id,
-      title: dateKorea,
-      headlines,
-      createAt: datetime,
-      thumbnail,
-    });
-
-    return res.status(200).json(newNews);
+    return res.status(200).json(news);
   } catch (error) {
     return res.status(500).json({ error });
   }

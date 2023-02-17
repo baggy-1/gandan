@@ -37,3 +37,9 @@ jobs:
         run: |
           curl --request POST \
           --url 'https://gandan-news.vercel.app/api/revalidate?secret=${{ secrets.REVALIDATE_SECRET }}&url=/'
+
+      - name: Notification
+        id: notification
+        run: |
+          curl --request POST \
+          --url 'https://gandan-news.vercel.app/api/pwa/notification?secret=${{ secrets.NOTIFICATION_SECRET }}'

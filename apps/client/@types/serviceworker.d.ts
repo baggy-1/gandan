@@ -147,3 +147,9 @@ interface ServiceWorkerGlobalScope {
   fetch(request: Request | string): Promise<Response>;
   skipWaiting(): Promise<void>;
 }
+
+interface NoticationPayload {
+  title: string;
+  body: string;
+  link: string;
+}

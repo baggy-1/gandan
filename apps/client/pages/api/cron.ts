@@ -34,7 +34,7 @@ const cronHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const googleNews = await getGoogleHeadlineNews();
     const headlines = getParseHeadlines(googleNews);
-    const thumbnail = getRandomThumbnail(id);
+    const thumbnail = getRandomThumbnail(headlines[0].title);
 
     await createNewsById(id, {
       id,

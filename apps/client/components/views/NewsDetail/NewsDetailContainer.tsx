@@ -3,8 +3,9 @@ import { useTheme, css } from '@emotion/react';
 import { createContext, Suspense, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useQueryNewsById } from '~/services/client/news/queries';
-import { Headline, HeadlineContainerSkeleton } from '~/components/common';
+import { HeadlineContainerSkeleton } from '~/components/common';
 import Header from './Header';
+import Headline from './Headline';
 
 interface Props {
   id: string;
@@ -50,7 +51,6 @@ const NewsDetailContainer = () => {
   return <NewsDetail id={id} />;
 };
 
-// TODO : 추후에 분리
 interface NewsDetailValue {
   isFontSizeLarge: boolean;
   setIsFontSizeLarge: React.Dispatch<React.SetStateAction<boolean>>;
