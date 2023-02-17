@@ -31,9 +31,14 @@ self.addEventListener('push', event => {
       return self.registration.showNotification(payload.title, {
         body: payload.body,
         data: { link: payload.link },
+        lang: 'ko-KR',
+        tag: 'gandan-news',
+        vibrate: [200, 100, 200, 100, 200, 100, 200],
+        image:
+          'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x512.png',
         icon: 'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x192.png',
         badge:
-          'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x96.png',
+          'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x128.png',
       });
     })
   );
@@ -42,6 +47,8 @@ self.addEventListener('push', event => {
 self.addEventListener('notificationclick', event => {
   event?.waitUntil(
     self.clients.matchAll().then(clientList => {
+      event.notification.close();
+
       // 앱이 열렸지만 활성화되지 않은 경우
       if (clientList.length > 0) {
         return clientList[0].focus();
