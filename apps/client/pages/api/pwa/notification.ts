@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import webpush from 'web-push';
 import { env } from '~/constants';
 import { getSubscriptions } from '~/services/server/pwa/subscription';
-import { Subscription } from '~/@types/pwa';
+import { parseSubscriptions } from './pwa.util';
 
 const notificationHandler = async (
   req: NextApiRequest,
@@ -37,7 +37,7 @@ const notificationHandler = async (
     const subscriptions = parseSubscriptions(originSubscriptions);
 
     const payload = {
-      title: '오늘의 뉴스',
+      title: '간단한 뉴스',
       body: '방금 새로운 뉴스가 도착했습니다!',
       link: 'https://gandan-news.vercel.app',
     };
@@ -50,10 +50,6 @@ const notificationHandler = async (
   } catch (error) {
     return res.status(500).json({ error });
   }
-};
-
-const parseSubscriptions = (originSubscriptions: Subscription.getResponse) => {
-  return Object.values(originSubscriptions);
 };
 
 export default notificationHandler;
