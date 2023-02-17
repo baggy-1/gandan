@@ -8,3 +8,4 @@ export { default as Setting } from './Setting';
 export { default as MagnifyingGlassPlus } from './MagnifyingGlassPlus';
 export { default as MagnifyingGlassMinus } from './MagnifyingGlassMinus';
 export { default as Download } from './Download';
+export { default as Bell } from './Bell';

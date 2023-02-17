@@ -24,6 +24,7 @@ const ToastContainer = () => {
           gap: 1rem;
           display: flex;
           flex-direction: column;
+          z-index: 3000;
         `}
       >
         {toasts.map(toastProps => {

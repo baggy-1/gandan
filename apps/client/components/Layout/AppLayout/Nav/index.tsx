@@ -2,9 +2,14 @@ import { Flex, Text, Button } from '@chakra-ui/react';
 import { css, useTheme } from '@emotion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ChevronLeft, Download } from '@svgs/common';
+import { useState } from 'react';
+import { Bell, ChevronLeft, Download } from '@svgs/common';
 import { useQueryMe } from '~/services/client/user/queries';
-import { UserAvatar } from '~/components/common';
+import {
+  UserAvatar,
+  NoticeBottomSheet,
+  DownloadBottomSheet,
+} from '~/components/common';
 import { useBeforeInstallPrompt } from '~/hooks/';
 
 const Nav = () => {
@@ -12,90 +17,118 @@ const Nav = () => {
   const { isDetail } = getRouterState(pathname);
   const { typography, colors } = useTheme();
   const { data: me } = useQueryMe();
-  const { installable, openInstallPrompt } = useBeforeInstallPrompt();
+  const { installable, openInstallPrompt, isPWA } = useBeforeInstallPrompt();
+  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+
+  const toggleNoticeModal = () => {
+    setIsNoticeModalOpen(prev => !prev);
+  };
+
+  const closeNoticeModal = () => {
+    setIsNoticeModalOpen(false);
+  };
+
+  const toggleDownloadModal = () => {
+    setIsDownloadModalOpen(prev => !prev);
+  };
+
+  const closeDownloadModal = () => {
+    setIsDownloadModalOpen(false);
+  };
 
   return (
-    <header
-      css={css`
-        width: 100%;
-        height: 100%;
-        padding: 1rem;
-        color: ${colors.white};
-        background-color: ${colors.primary};
-        position: sticky;
-        top: 0;
-        display: flex;
-        justify-content: center;
-        z-index: 999;
-      `}
-    >
-      <Flex
+    <>
+      <header
         css={css`
           width: 100%;
-          max-width: 96rem;
+          height: 100%;
+          padding: 1rem;
+          color: ${colors.white};
+          background-color: ${colors.primary};
+          position: sticky;
+          top: 0;
+          display: flex;
+          justify-content: center;
+          z-index: 999;
         `}
       >
         <Flex
           css={css`
-            width: 33%;
-            height: 2rem;
-            margin-right: auto;
-            justify-content: flex-start;
-            align-items: center;
+            width: 100%;
+            max-width: 96rem;
           `}
         >
-          {isDetail && (
-            <Link href="/">
-              <button onClick={back} type="button">
-                <ChevronLeft stroke={colors.white} />
-              </button>
-            </Link>
-          )}
-        </Flex>
-        <Button onClick={() => push('/')}>
-          <Text
+          <Flex
             css={css`
-              ${typography.headline5}
+              width: 33%;
+              height: 2rem;
+              margin-right: auto;
+              justify-content: flex-start;
+              align-items: center;
             `}
           >
-            GD News
-          </Text>
-        </Button>
-        <Flex
-          justifyContent="flex-end"
-          alignItems="center"
-          css={css`
-            width: 33%;
-            height: 2rem;
-            margin-left: auto;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 1rem;
-          `}
-        >
-          {installable && (
-            <button onClick={openInstallPrompt} type="button">
-              <Download width="1.5rem" height="1.5rem" />
-            </button>
-          )}
-          {me ? (
-            <UserAvatar
-              profile={me.profile}
-              onClick={() => push('/user/mynews')}
-            />
-          ) : (
-            <Button
+            {isDetail && (
+              <Link href="/">
+                <button onClick={back} type="button">
+                  <ChevronLeft stroke={colors.white} />
+                </button>
+              </Link>
+            )}
+          </Flex>
+          <Button onClick={() => push('/')}>
+            <Text
               css={css`
-                ${typography.subtitle1}
+                ${typography.headline5}
               `}
-              onClick={() => push('/login')}
             >
-              로그인
-            </Button>
-          )}
+              GD News
+            </Text>
+          </Button>
+          <Flex
+            justifyContent="flex-end"
+            alignItems="center"
+            css={css`
+              width: 33%;
+              height: 2rem;
+              margin-left: auto;
+              justify-content: flex-end;
+              align-items: center;
+              gap: 1rem;
+            `}
+          >
+            {isPWA ? (
+              <button onClick={toggleNoticeModal} type="button">
+                <Bell width="1.5rem" height="1.5rem" />
+              </button>
+            ) : (
+              <button onClick={toggleDownloadModal} type="button">
+                <Download width="1.5rem" height="1.5rem" />
+              </button>
+            )}
+            {me ? (
+              <UserAvatar
+                profile={me.profile}
+                onClick={() => push('/user/mynews')}
+              />
+            ) : (
+              <Button
+                css={css`
+                  ${typography.subtitle1}
+                `}
+                onClick={() => push('/login')}
+              >
+                로그인
+              </Button>
+            )}
+          </Flex>
         </Flex>
-      </Flex>
-    </header>
+      </header>
+      {isNoticeModalOpen && <NoticeBottomSheet onClose={closeNoticeModal} />}
+      {isDownloadModalOpen && (
+        <DownloadBottomSheet onClose={closeDownloadModal} />
+      )}
+    </>
   );
 };
 

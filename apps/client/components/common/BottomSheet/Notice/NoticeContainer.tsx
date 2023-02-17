@@ -1,10 +1,12 @@
+import { css, useTheme } from '@emotion/react';
 import { useToast } from '~/components/common';
 import { useCreateSubscription } from '~/services/client/pwa/subscription';
-import { subscriptionAction } from './PWA.utils';
+import { subscriptionAction } from './Notice.utils';
 
-const PWAContainer = () => {
+const NoticeContainer = () => {
   const toast = useToast();
   const { mutate: createSubscription } = useCreateSubscription();
+  const { colors } = useTheme();
 
   const onClickSubscription = async () => {
     const { type, pushSubscription } = await subscriptionAction();
@@ -66,12 +68,48 @@ const PWAContainer = () => {
 
   return (
     <div>
-      <div>매일 아침, 뉴스가 발행되면 알림을 보내드립니다.</div>
-      <button type="button" onClick={onClickSubscription}>
-        알림 받기
-      </button>
+      <div
+        css={css`
+          width: 100%;
+          padding: 1rem;
+        `}
+      >
+        매일 아침, <br /> 뉴스가 발행되면{' '}
+        <span
+          css={css`
+            color: ${colors.primary};
+            font-weight: 700;
+          `}
+        >
+          알림을 보내드립니다.
+        </span>
+      </div>
+      <div
+        css={css`
+          width: 100%;
+          padding: 1rem;
+        `}
+      >
+        <button
+          css={css`
+            background-color: ${colors.primary};
+            color: #ffffff;
+            width: fit-content;
+            height: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 1rem;
+          `}
+          type="button"
+          onClick={onClickSubscription}
+        >
+          알림 받기
+        </button>
+      </div>
     </div>
   );
 };
 
-export default PWAContainer;
+export default NoticeContainer;
