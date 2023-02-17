@@ -17,7 +17,7 @@ const Nav = () => {
   const { isDetail } = getRouterState(pathname);
   const { typography, colors } = useTheme();
   const { data: me } = useQueryMe();
-  const { installable, openInstallPrompt, isPWA } = useBeforeInstallPrompt();
+  const { isPWA, ...rest } = useBeforeInstallPrompt();
   const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
   const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
 
@@ -126,7 +126,7 @@ const Nav = () => {
       </header>
       {isNoticeModalOpen && <NoticeBottomSheet onClose={closeNoticeModal} />}
       {isDownloadModalOpen && (
-        <DownloadBottomSheet onClose={closeDownloadModal} />
+        <DownloadBottomSheet onClose={closeDownloadModal} {...rest} />
       )}
     </>
   );

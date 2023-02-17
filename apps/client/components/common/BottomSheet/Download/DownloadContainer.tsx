@@ -1,6 +1,5 @@
 import { css, useTheme } from '@emotion/react';
 import Link from 'next/link';
-import { useBeforeInstallPrompt } from '~/hooks';
 import getUserDevice from '~/utils/getUserDevice';
 
 const CHROME_INTENT_URL =
@@ -17,9 +16,13 @@ const createMesage = (userDevice: ReturnType<typeof getUserDevice>) => {
   }
 };
 
-const DownloadContainer = () => {
+interface Props {
+  installable: boolean;
+  openInstallPrompt: () => void;
+}
+
+const DownloadContainer = ({ installable, openInstallPrompt }: Props) => {
   const { colors } = useTheme();
-  const { installable, openInstallPrompt } = useBeforeInstallPrompt();
   const userDevice = getUserDevice();
 
   return (
