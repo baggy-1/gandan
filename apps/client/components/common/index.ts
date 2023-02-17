@@ -7,3 +7,4 @@ export * from './Skeleton';
 export * from './Toast';
 export { default as Badge } from './Badge';
 export { default as OpenGraph } from './OpenGraph';
+export * from './BottomSheet';

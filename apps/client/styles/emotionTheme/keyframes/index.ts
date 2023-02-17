@@ -35,10 +35,20 @@ const scaleOut = keyframes`
     }
 `;
 
+const bottomUp = keyframes`
+    0% {
+        transform: translate3d(0, 100%, 0);
+    }
+    100% {
+        transform: translate3d(1);
+    }
+`;
+
 const _keyframes = {
   blink,
   bottomIn,
   scaleOut,
+  bottomUp,
 };
 
 export default _keyframes;

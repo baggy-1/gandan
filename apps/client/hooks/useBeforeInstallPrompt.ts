@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { isSafari } from '~/utils';
 
 const useBeforeInstallPrompt = () => {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [isInstalled, setIsInstalled] = useState(false);
+  const [isPWA, setIsPWA] = useState(false);
 
   const openInstallPrompt = async () => {
     if (!deferredPrompt) {
@@ -16,6 +18,7 @@ const useBeforeInstallPrompt = () => {
   useEffect(() => {
     const displaymode = getPWADisplayMode();
     if (displaymode !== 'browser') {
+      setIsPWA(true);
       setIsInstalled(true);
       return;
     }
@@ -45,6 +48,7 @@ const useBeforeInstallPrompt = () => {
   return {
     installable: !isInstalled && !!deferredPrompt,
     openInstallPrompt,
+    isPWA,
   };
 };
 
@@ -62,12 +66,6 @@ const getPWADisplayMode = () => {
   }
 
   return 'browser';
-};
-
-const isSafari = (
-  navigator: Navigator
-): navigator is Navigator & { standalone: boolean } => {
-  return navigator.userAgent.toLowerCase().includes('safari');
 };
 
 export default useBeforeInstallPrompt;
