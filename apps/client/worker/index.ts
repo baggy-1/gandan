@@ -35,10 +35,10 @@ self.addEventListener('push', event => {
         tag: 'gandan-news',
         vibrate: [200, 100, 200, 100, 200, 100, 200],
         image:
-          'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x512.png',
+          'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x192.png',
         icon: 'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x192.png',
         badge:
-          'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x128.png',
+          'https://gandan-news.vercel.app/icons/maskable/maskable_icon_x192.png',
       });
     })
   );
