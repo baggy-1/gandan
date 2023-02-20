@@ -50,7 +50,7 @@ const Nav = () => {
           top: 0;
           display: flex;
           justify-content: center;
-          z-index: 999;
+          z-index: 9999;
         `}
       >
         <Flex

@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 
 const useScrollTopicBox = (ref: HTMLDivElement | null) => {
-  const [scrollPosition, setScrollPosition] = useState({
-    isLeftShow: false,
-    isRightShow: false,
-  });
+  const [isLeftShow, setIsLeftShow] = useState(false);
+  const [isRightShow, setIsRightShow] = useState(false);
 
   const onClickScrollX = (pixel: number) => {
     if (!ref) {
@@ -18,13 +16,18 @@ const useScrollTopicBox = (ref: HTMLDivElement | null) => {
       behavior: 'smooth',
     });
 
-    const { isLeftShow, isRightShow } = isArrowShow(ref, movePixel);
+    const { isLeftShow: leftShow, isRightShow: rightShow } = isArrowShow(
+      ref,
+      movePixel
+    );
 
-    if (isLeftShow || isRightShow) {
-      setScrollPosition({
-        isLeftShow,
-        isRightShow,
-      });
+    if (isLeftShow) {
+      setIsLeftShow(leftShow);
+      return;
+    }
+
+    if (isRightShow) {
+      setIsRightShow(rightShow);
     }
   };
 
@@ -33,18 +36,26 @@ const useScrollTopicBox = (ref: HTMLDivElement | null) => {
       return;
     }
 
-    const { isLeftShow, isRightShow } = isArrowShow(ref, ref.scrollLeft);
+    const { isLeftShow: leftShow, isRightShow: rightShow } = isArrowShow(
+      ref,
+      ref.scrollLeft
+    );
 
-    if (isLeftShow || isRightShow) {
-      setScrollPosition({
-        isLeftShow,
-        isRightShow,
-      });
+    if (isLeftShow) {
+      setIsLeftShow(leftShow);
+      return;
+    }
+
+    if (isRightShow) {
+      setIsRightShow(rightShow);
     }
   }, [ref]);
 
   return {
-    scrollPosition,
+    scrollPosition: {
+      isLeftShow,
+      isRightShow,
+    },
     onClickScrollX,
   };
 };
