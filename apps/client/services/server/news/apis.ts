@@ -1,6 +1,6 @@
-import { parse } from 'rss-to-json';
-import { env } from '~/constants';
+import { env, topic as TOPIC } from '~/constants';
 import serverApi from '../api';
+import { getRssToJson } from './utils';
 
 export const getNaverNews = () => {
   return serverApi.get('https://openapi.naver.com/v1/search/news.json', {
@@ -15,14 +15,12 @@ export const getNaverNews = () => {
   });
 };
 
-export const getGoogleHeadlineNews = () => {
-  return getRssToJson(
-    'https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtdHZHZ0pMVWlnQVAB?hl=ko&gl=KR&ceid=KR%3Ako&oc=11'
-  );
-};
+export const getGoogleNewsByTopic = (topic: Topic) => {
+  const { query } = TOPIC[topic];
 
-const getRssToJson: Parse = (rss: string) => {
-  return parse(rss);
+  return getRssToJson(
+    `https://news.google.com/rss/topics/${query}?hl=ko&gl=KR&ceid=KR%3Ako`
+  );
 };
 
 export const createNewsById = (id: string, news: News) => {

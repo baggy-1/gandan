@@ -1,6 +1,6 @@
 import { useSuspensedQuery } from '~/hooks';
 import queryKeys from '../querykeys';
-import { getNews, getNewsById } from './apis';
+import { getNews, getNewsById, getNewsByTopic } from './apis';
 
 export const useQueryNews = () => {
   return useSuspensedQuery(queryKeys.news, getNews, {
@@ -14,4 +14,10 @@ export const useQueryNewsById = (id: string) => {
     cacheTime: Infinity,
     staleTime: Infinity,
   });
+};
+
+export const useQueryNewsByTopic = (topic: Topic) => {
+  return useSuspensedQuery(queryKeys.newsByTopic(topic), () =>
+    getNewsByTopic(topic)
+  );
 };

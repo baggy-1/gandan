@@ -24,3 +24,17 @@ interface ServerNewslist {
 }
 
 type ClientNewslist = Omit<News, 'headlines'>[];
+
+type Topic =
+  | 'daily'
+  | 'politics'
+  | 'economy'
+  | 'society'
+  | 'business'
+  | 'it'
+  | 'science'
+  | 'culture'
+  | 'world'
+  | 'entertainment'
+  | 'sports'
+  | 'health';

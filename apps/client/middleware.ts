@@ -14,6 +14,7 @@ const excludePaths = [
   '/api/revalidate',
   '/api/pwa/notification',
   '/api/pwa/subscription',
+  '/api/topics',
 ];
 
 const authPaths = ['/user/mynews', '/user/profile'];

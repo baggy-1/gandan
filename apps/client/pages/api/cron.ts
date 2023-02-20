@@ -2,11 +2,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { env } from '~/constants';
 import {
   createNewsById,
-  getGoogleHeadlineNews,
+  getGoogleNewsByTopic,
   getNewsById,
 } from '~/services/server/news';
+import {
+  getParseHeadlines,
+  getRandomThumbnail,
+} from '~/services/server/news/utils';
 import { getKoreaDate } from '~/utils';
-import { getParseHeadlines, getRandomThumbnail } from './news/[id].util';
 
 const cronHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {
@@ -32,7 +35,7 @@ const cronHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ success: true, message: 'Already exist', id });
     }
 
-    const googleNews = await getGoogleHeadlineNews();
+    const googleNews = await getGoogleNewsByTopic('daily');
     const headlines = getParseHeadlines(googleNews);
     const thumbnail = getRandomThumbnail(headlines[0].title);
 

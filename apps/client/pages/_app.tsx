@@ -14,7 +14,16 @@ import ToastContainer from '~/components/common/Toast/components/ToastContainer'
 const noneLayoutPaths = ['/oauth/kakao', '/oauth/google'];
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [queryClient] = React.useState(() => new QueryClient());
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  );
   const router = useRouter();
 
   const Layout = noneLayoutPaths.includes(router.pathname)

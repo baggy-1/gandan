@@ -1,3 +1,9 @@
+import parse from 'rss-to-json';
+
+export const getRssToJson: Parse = (rss: string) => {
+  return parse(rss);
+};
+
 export const getParseHeadlines = (news: GoogleNews): Headline[] => {
   const { items } = news;
 

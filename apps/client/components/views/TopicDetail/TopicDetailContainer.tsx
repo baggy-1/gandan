@@ -1,33 +1,28 @@
-import { Divider, VStack, Center } from '@chakra-ui/react';
-import { useTheme, css } from '@emotion/react';
-import { Suspense } from 'react';
 import { useRouter } from 'next/router';
+import { Suspense } from 'react';
+import { Center, Divider, VStack } from '@chakra-ui/react';
 import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
-import { useQueryNewsById } from '~/services/client/news/queries';
-import {
-  Header,
-  Headline,
-  HeadlineContainerSkeleton,
-} from '~/components/common';
-import { isValidId } from './NewsDetail.util';
-import Bookmark from './Bookmark';
+import { css, useTheme } from '@emotion/react';
+import { hasProperty } from '~/utils';
+import { topic as TOPIC } from '~/constants';
+import { Header, Headline, HeadlineSkeleton } from '~/components/common';
+import { useQueryNewsByTopic } from '~/services/client/news';
 import { useMagnifying } from '~/hooks';
 
 interface Props {
-  id: News['id'];
+  topic: Topic;
 }
 
-const NewsDetail = ({ id }: Props) => {
+const TopicDetail = ({ topic }: Props) => {
   const { colors } = useTheme();
-  const { data: news } = useQueryNewsById(id);
+  const { data: topicHeadlines } = useQueryNewsByTopic(topic);
   const { isFontSizeLarge, toggleFontSize, Icon } = useMagnifying();
 
   return (
     <VStack>
       <Header
-        title={dayjs(news.createAt).locale('ko-KR').format('MM월 DD일 dddd')}
-        createAt={news.createAt}
+        title={TOPIC[topic].name}
+        createAt={dayjs().format('YYYY-MM-DD HH:mm:ss')}
         right={
           <Center
             css={css`
@@ -38,7 +33,6 @@ const NewsDetail = ({ id }: Props) => {
             <button type="button" onClick={toggleFontSize}>
               <Icon />
             </button>
-            <Bookmark newsId={id} />
           </Center>
         }
       />
@@ -55,7 +49,7 @@ const NewsDetail = ({ id }: Props) => {
           gap: 1rem;
         `}
       >
-        {news.headlines.map(headline => {
+        {topicHeadlines.map(headline => {
           return (
             <Headline
               key={headline.id}
@@ -69,24 +63,20 @@ const NewsDetail = ({ id }: Props) => {
   );
 };
 
-const NewsDetailContainer = () => {
+const TopicDetailContainer = () => {
   const {
-    query: { id },
+    query: { topic },
   } = useRouter();
 
-  if (!id || typeof id !== 'string' || !isValidId(id)) {
-    return null;
+  if (!topic || typeof topic !== 'string' || !hasProperty(TOPIC, topic)) {
+    return <div>잘못된 경로입니다.</div>;
   }
 
-  return <NewsDetail id={id} />;
-};
-
-const SuspenseNewsDetailContainer = () => {
   return (
-    <Suspense fallback={<HeadlineContainerSkeleton />}>
-      <NewsDetailContainer />
+    <Suspense fallback={<HeadlineSkeleton />}>
+      <TopicDetail topic={topic} />
     </Suspense>
   );
 };
 
-export default SuspenseNewsDetailContainer;
+export default TopicDetailContainer;
