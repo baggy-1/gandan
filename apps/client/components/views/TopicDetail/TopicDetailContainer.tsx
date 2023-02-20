@@ -5,7 +5,11 @@ import dayjs from 'dayjs';
 import { css, useTheme } from '@emotion/react';
 import { hasProperty } from '~/utils';
 import { topic as TOPIC } from '~/constants';
-import { Header, Headline, HeadlineSkeleton } from '~/components/common';
+import {
+  Header,
+  Headline,
+  HeadlineContainerSkeleton,
+} from '~/components/common';
 import { useQueryNewsByTopic } from '~/services/client/news';
 import { useMagnifying } from '~/hooks';
 
@@ -73,7 +77,7 @@ const TopicDetailContainer = () => {
   }
 
   return (
-    <Suspense fallback={<HeadlineSkeleton />}>
+    <Suspense fallback={<HeadlineContainerSkeleton />}>
       <TopicDetail topic={topic} />
     </Suspense>
   );
