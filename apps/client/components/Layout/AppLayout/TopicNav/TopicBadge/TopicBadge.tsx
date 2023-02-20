@@ -21,7 +21,7 @@ const TopicBadge = ({ name, id, isActive }: Props) => {
           display: flex;
           justify-content: cetner;
           align-items: center;
-          border-radius: 0.5rem;
+          border-radius: 1.5rem;
         `}
       >
         {name}
