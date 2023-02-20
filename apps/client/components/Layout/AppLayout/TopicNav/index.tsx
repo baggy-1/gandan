@@ -9,7 +9,7 @@ import useScrollTopicBox from './TopicNav.hooks';
 
 const topics = Object.values(TOPICS);
 
-const accessPath = ['/news/topics/[topic]', '/news/[id]', '/'];
+const accessPath = ['/news/[id]', '/'];
 
 const TopicNav = () => {
   const {
