@@ -1,4 +1,4 @@
-interface Props {
+export interface Props {
   width?: string | number;
   height?: string | number;
   fill?: string;

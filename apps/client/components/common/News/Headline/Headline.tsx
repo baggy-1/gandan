@@ -2,16 +2,15 @@ import { Box, Card, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useTheme, css } from '@emotion/react';
 import { CursorArrow } from '~/assets/svgs/common';
-import { useNewsDetail } from '~/components/views/NewsDetail/NewsDetailContainer';
 
 interface Props {
   headline: Headline;
+  titleFontSize?: 'default' | 'large';
 }
 
-const Headline = ({ headline }: Props) => {
+const Headline = ({ headline, titleFontSize = 'default' }: Props) => {
   const { link, press, title } = headline;
   const { typography, colors } = useTheme();
-  const { isFontSizeLarge } = useNewsDetail();
 
   return (
     <Link href={link}>
@@ -44,7 +43,7 @@ const Headline = ({ headline }: Props) => {
           </Flex>
           <span
             css={css`
-              ${isFontSizeLarge ? typography.headline4 : typography.headline6}
+              ${TitleFont(titleFontSize)}
             `}
           >
             {title}
@@ -53,6 +52,21 @@ const Headline = ({ headline }: Props) => {
       </Card>
     </Link>
   );
+};
+
+const TitleFont = (titleFontSize: 'default' | 'large') => {
+  const { typography } = useTheme();
+
+  switch (titleFontSize) {
+    case 'large':
+      return css`
+        ${typography.headline4}
+      `;
+    default:
+      return css`
+        ${typography.headline6}
+      `;
+  }
 };
 
 export default Headline;

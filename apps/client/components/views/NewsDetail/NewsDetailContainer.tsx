@@ -1,23 +1,47 @@
-import { Divider, VStack } from '@chakra-ui/react';
+import { Divider, VStack, Center } from '@chakra-ui/react';
 import { useTheme, css } from '@emotion/react';
-import { createContext, Suspense, useContext, useState } from 'react';
+import { Suspense } from 'react';
 import { useRouter } from 'next/router';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import { useQueryNewsById } from '~/services/client/news/queries';
-import { HeadlineContainerSkeleton } from '~/components/common';
-import Header from './Header';
-import Headline from './Headline';
+import {
+  Header,
+  Headline,
+  HeadlineContainerSkeleton,
+} from '~/components/common';
+import { isValidId } from './NewsDetail.util';
+import Bookmark from './Bookmark';
+import { useMagnifying } from '~/hooks';
 
 interface Props {
-  id: string;
+  id: News['id'];
 }
 
 const NewsDetail = ({ id }: Props) => {
   const { colors } = useTheme();
   const { data: news } = useQueryNewsById(id);
+  const { isFontSizeLarge, toggleFontSize, Icon } = useMagnifying();
 
   return (
     <VStack>
-      <Header {...news} />
+      <Header
+        title={dayjs(news.createAt).locale('ko-KR').format('MM월 DD일 dddd')}
+        createAt={news.createAt}
+        right={
+          <Center
+            css={css`
+              display: flex;
+              gap: 1rem;
+            `}
+          >
+            <button type="button" onClick={toggleFontSize}>
+              <Icon />
+            </button>
+            <Bookmark newsId={id} />
+          </Center>
+        }
+      />
       <Divider
         css={css`
           border: 1px solid ${colors.grayE8};
@@ -32,7 +56,13 @@ const NewsDetail = ({ id }: Props) => {
         `}
       >
         {news.headlines.map(headline => {
-          return <Headline key={headline.id} headline={headline} />;
+          return (
+            <Headline
+              key={headline.id}
+              headline={headline}
+              titleFontSize={isFontSizeLarge ? 'large' : 'default'}
+            />
+          );
         })}
       </VStack>
     </VStack>
@@ -44,47 +74,17 @@ const NewsDetailContainer = () => {
     query: { id },
   } = useRouter();
 
-  if (!id || typeof id !== 'string') {
+  if (!id || typeof id !== 'string' || !isValidId(id)) {
     return null;
   }
 
   return <NewsDetail id={id} />;
 };
 
-interface NewsDetailValue {
-  isFontSizeLarge: boolean;
-  setIsFontSizeLarge: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const NewsDetailContext = createContext<NewsDetailValue | null>(null);
-
-const NewsDetailProvider = () => {
-  const [isFontSizeLarge, setIsFontSizeLarge] = useState(false);
-
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const value = { isFontSizeLarge, setIsFontSizeLarge };
-
-  return (
-    <NewsDetailContext.Provider value={value}>
-      <NewsDetailContainer />
-    </NewsDetailContext.Provider>
-  );
-};
-
-export const useNewsDetail = () => {
-  const context = useContext(NewsDetailContext);
-
-  if (!context) {
-    throw new Error('must be used within a NewsDetailProvider');
-  }
-
-  return context;
-};
-
 const SuspenseNewsDetailContainer = () => {
   return (
     <Suspense fallback={<HeadlineContainerSkeleton />}>
-      <NewsDetailProvider />
+      <NewsDetailContainer />
     </Suspense>
   );
 };
