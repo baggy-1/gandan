@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { env } from '~/constants';
 import {
   createNewsById,
-  getGoogleNewsByTopic,
+  getNewsByTopic,
   getNewsById,
 } from '~/services/server/news';
 import {
@@ -35,7 +35,7 @@ const cronHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ success: true, message: 'Already exist', id });
     }
 
-    const googleNews = await getGoogleNewsByTopic('daily');
+    const googleNews = await getNewsByTopic('daily');
     const headlines = getParseHeadlines(googleNews);
     const thumbnail = getRandomThumbnail(headlines[0].title);
 
