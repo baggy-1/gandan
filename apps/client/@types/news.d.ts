@@ -37,4 +37,5 @@ type Topic =
   | 'world'
   | 'entertainment'
   | 'sports'
-  | 'health';
+  | 'health'
+  | 'stock';
