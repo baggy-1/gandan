@@ -13,13 +13,13 @@ const AppLayout = ({ children }: PropsWithChildren) => {
   return (
     <VStack>
       {pathname === '/login' ? <LoginNav /> : <Nav />}
-      {showTopicNav && <TopicNav />}
       <Container
         css={css`
           width: 100%;
           max-width: 96rem;
         `}
       >
+        {showTopicNav && <TopicNav />}
         <main>{children}</main>
       </Container>
     </VStack>
