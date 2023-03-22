@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { topic as TOPIC } from '~/constants';
-import { getGoogleNewsByTopic } from '~/services/server/news';
+import { getNewsByTopic } from '~/services/server/news';
 import { getParseHeadlines } from '~/services/server/news/utils';
 import { hasProperty } from '~/utils';
 
@@ -21,7 +21,7 @@ const topicHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const googleNews = await getGoogleNewsByTopic(topic);
+    const googleNews = await getNewsByTopic(topic);
     const headlines = getParseHeadlines(googleNews);
 
     return res.status(200).json(headlines);
