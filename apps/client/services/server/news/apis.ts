@@ -15,12 +15,10 @@ export const getNaverNews = () => {
   });
 };
 
-export const getGoogleNewsByTopic = (topic: Topic) => {
-  const { query } = TOPIC[topic];
+export const getNewsByTopic = (topic: Topic) => {
+  const { url } = TOPIC[topic];
 
-  return getRssToJson(
-    `https://news.google.com/rss/topics/${query}?hl=ko&gl=KR&ceid=KR%3Ako`
-  );
+  return getRssToJson(url);
 };
 
 export const createNewsById = (id: string, news: News) => {
