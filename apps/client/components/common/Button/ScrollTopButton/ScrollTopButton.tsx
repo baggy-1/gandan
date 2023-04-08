@@ -8,8 +8,8 @@ const ScrollTopButton = () => {
     <button
       css={css`
         position: fixed;
-        bottom: 1rem;
-        right: 1rem;
+        bottom: 3rem;
+        right: 2rem;
         width: 3rem;
         height: 3rem;
         background-color: ${colors.primary};
