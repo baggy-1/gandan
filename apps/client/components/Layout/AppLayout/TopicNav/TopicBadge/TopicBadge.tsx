@@ -9,7 +9,7 @@ interface Props {
 
 const TopicBadge = ({ name, id, isActive }: Props) => {
   return (
-    <Link key={id} href={id === 'daily' ? '/' : `/news/topics/${id}`}>
+    <Link key={id} href={id === 'daily' ? '/' : `/news/topics/${id}`} replace>
       <div
         css={css`
           cursor: pointer;

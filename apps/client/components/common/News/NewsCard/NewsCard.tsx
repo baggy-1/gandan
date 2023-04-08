@@ -16,6 +16,7 @@ const NewsCard = ({ id, title, thumbnail, badge }: Props) => {
         cursor: pointer;
       `}
       href={`/news/${id}`}
+      replace
     >
       <Box
         css={css`
