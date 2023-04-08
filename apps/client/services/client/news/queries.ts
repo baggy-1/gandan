@@ -17,7 +17,12 @@ export const useQueryNewsById = (id: string) => {
 };
 
 export const useQueryNewsByTopic = (topic: Topic) => {
-  return useSuspensedQuery(queryKeys.newsByTopic(topic), () =>
-    getNewsByTopic(topic)
+  return useSuspensedQuery(
+    queryKeys.newsByTopic(topic),
+    () => getNewsByTopic(topic),
+    {
+      cacheTime: Infinity,
+      staleTime: Infinity,
+    }
   );
 };
