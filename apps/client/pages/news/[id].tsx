@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async (
 
 export const getStaticPaths = async () => {
   const news = await getNews();
-  const paths = news.map(({ id }) => ({
+  const paths = news.slice(0, 30).map(({ id }) => ({
     params: { id },
   }));
 
