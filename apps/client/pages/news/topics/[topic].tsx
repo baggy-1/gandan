@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import TopicDetailViews from '@views/TopicDetail';
@@ -27,40 +27,54 @@ const Topic = () => {
   );
 };
 
-export default Topic;
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  if (!params || !params.topic || typeof params.topic !== 'string') {
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext
+) => {
+  if (
+    !context.params ||
+    !context.params.topic ||
+    typeof context.params.topic !== 'string' ||
+    !hasProperty(TOPIC, context.params.topic)
+  ) {
     return {
       props: {},
     };
   }
 
-  const { topic } = params;
-
-  if (!isTopicKeyword(topic)) {
-    return {
-      props: {},
-    };
-  }
-
+  const {
+    params: { topic },
+  } = context;
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(
     queryKeys.newsByTopic(topic),
     () => getNewsByTopic(topic),
     {
-      staleTime: 1000 * 60 * 5,
+      cacheTime: Infinity,
+      staleTime: Infinity,
     }
   );
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      topic,
     },
+    revalidate: 60 * 30, // 30분
   };
 };
 
-const isTopicKeyword = (topic: string): topic is Topic => {
-  return Object.keys(TOPIC).includes(topic);
+export const getStaticPaths: GetStaticPaths = () => {
+  const paths = Object.values(TOPIC)
+    .filter(({ id }) => id !== 'daily')
+    .map(({ id }) => ({
+      params: { topic: id },
+    }));
+
+  return {
+    paths,
+    fallback: 'blocking',
+  };
 };
+
+export default Topic;
