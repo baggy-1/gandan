@@ -29,6 +29,10 @@ const Headline = ({ headline, titleFontSize = 'default' }: Props) => {
                 border: 1px solid ${colors.grayE8};
                 border-radius: 0.25rem;
                 background-color: ${colors.grayE8};
+                max-width: 80%;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
               `}
             >
               <span
