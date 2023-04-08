@@ -8,3 +8,4 @@ export { default as Badge } from './Badge';
 export { default as OpenGraph } from './OpenGraph';
 export * from './BottomSheet';
 export * from './News';
+export * from './Button';

@@ -9,6 +9,7 @@ import {
   Header,
   Headline,
   HeadlineContainerSkeleton,
+  ScrollTopButton,
 } from '~/components/common';
 import { useQueryNewsByTopic } from '~/services/client/news';
 import { useMagnifying } from '~/hooks';
@@ -63,6 +64,7 @@ const TopicDetail = ({ topic }: Props) => {
           );
         })}
       </VStack>
+      <ScrollTopButton />
     </VStack>
   );
 };

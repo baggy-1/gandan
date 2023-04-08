@@ -9,6 +9,7 @@ import {
   Header,
   Headline,
   HeadlineContainerSkeleton,
+  ScrollTopButton,
 } from '~/components/common';
 import { isValidId } from './NewsDetail.util';
 import Bookmark from './Bookmark';
@@ -65,6 +66,7 @@ const NewsDetail = ({ id }: Props) => {
           );
         })}
       </VStack>
+      <ScrollTopButton />
     </VStack>
   );
 };

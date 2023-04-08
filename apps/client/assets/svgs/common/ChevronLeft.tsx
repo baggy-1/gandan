@@ -23,9 +23,6 @@ const ChevronLeft = ({
       className="w-6 h-6"
       width={width}
       height={height}
-      style={{
-        backgroundColor: fill,
-      }}
     >
       <path
         strokeLinecap="round"
