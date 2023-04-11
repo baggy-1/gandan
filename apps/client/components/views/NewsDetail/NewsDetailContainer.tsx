@@ -9,6 +9,7 @@ import {
   Header,
   Headline,
   HeadlineContainerSkeleton,
+  LazyLoadingVisible,
   ScrollTopButton,
 } from '~/components/common';
 import { isValidId } from './NewsDetail.util';
@@ -58,11 +59,13 @@ const NewsDetail = ({ id }: Props) => {
       >
         {news.headlines.map(headline => {
           return (
-            <Headline
-              key={headline.id}
-              headline={headline}
-              titleFontSize={isFontSizeLarge ? 'large' : 'default'}
-            />
+            <LazyLoadingVisible>
+              <Headline
+                key={headline.id}
+                headline={headline}
+                titleFontSize={isFontSizeLarge ? 'large' : 'default'}
+              />
+            </LazyLoadingVisible>
           );
         })}
       </VStack>

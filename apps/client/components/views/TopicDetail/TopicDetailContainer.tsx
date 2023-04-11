@@ -9,6 +9,7 @@ import {
   Header,
   Headline,
   HeadlineContainerSkeleton,
+  LazyLoadingVisible,
   ScrollTopButton,
 } from '~/components/common';
 import { useQueryNewsByTopic } from '~/services/client/news';
@@ -56,11 +57,13 @@ const TopicDetail = ({ topic }: Props) => {
       >
         {topicHeadlines.map(headline => {
           return (
-            <Headline
-              key={headline.id}
-              headline={headline}
-              titleFontSize={isFontSizeLarge ? 'large' : 'default'}
-            />
+            <LazyLoadingVisible>
+              <Headline
+                key={headline.id}
+                headline={headline}
+                titleFontSize={isFontSizeLarge ? 'large' : 'default'}
+              />
+            </LazyLoadingVisible>
           );
         })}
       </VStack>

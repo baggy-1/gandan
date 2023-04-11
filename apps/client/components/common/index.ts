@@ -9,3 +9,4 @@ export { default as OpenGraph } from './OpenGraph';
 export * from './BottomSheet';
 export * from './News';
 export * from './Button';
+export { default as LazyLoadingVisible } from './LazyLoadingVisible';

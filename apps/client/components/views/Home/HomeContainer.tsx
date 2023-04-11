@@ -1,5 +1,11 @@
 import { Suspense } from 'react';
-import { Badge, NewsCard, NewsListSkeleton, Grid } from '~/components/common';
+import {
+  Badge,
+  NewsCard,
+  NewsListSkeleton,
+  Grid,
+  LazyLoadingVisible,
+} from '~/components/common';
 import { useQueryNews } from '~/services/client/news';
 import { getKoreaDate } from '~/utils';
 
@@ -14,7 +20,11 @@ const HomeContainer = () => {
         const badge =
           today === createDay ? <Badge colorScheme="green">NEW</Badge> : null;
 
-        return <NewsCard key={news.id} {...news} badge={badge} />;
+        return (
+          <LazyLoadingVisible width="10rem" height="12rem">
+            <NewsCard key={news.id} {...news} badge={badge} />
+          </LazyLoadingVisible>
+        );
       })}
     </Grid>
   );
